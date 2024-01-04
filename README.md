@@ -32,5 +32,9 @@ EDMが好きで作曲を趣味にしていますが自分で聞くためだけ�
 ## 使用素材
 後ほど記載
 
+## 実装機能リストURL
+https://docs.google.com/spreadsheets/d/10QTPxcN-EcEGC6juX-6gqJusyHrpRm3WTYpyOre-h5s/edit?usp=sharing
+
+
 
 
