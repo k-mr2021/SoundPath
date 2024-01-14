@@ -1,0 +1,38 @@
+<div>
+  <div>
+    <div>
+      <h3><%= @user_found.name %>さんの会員情報編集</h3>
+    </div>
+  </div>
+  <div>
+    <%= form_with model: @user_found, url: admin_user_path, method: :patch do |f| %>
+      <div>
+        <b>User_ID</b>
+        <%= @user_found.id %>
+      </div>
+      <div>
+        <b>Name</b>
+        <%= @user_found.name %>
+      </div>
+      <div>
+        <b>Email</b>
+        <%= @user_found.email %>
+      </div>
+      <div>
+        <b>Status</b>
+        <%= f.radio_button :is_active, true %>
+          <%= f.label :"有効" %>
+          <%= f.radio_button :is_active, false %>
+          <%= f.label :"無効" %>
+      </div>
+      <div>
+        <%= f.submit "変更を保存" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+
+
+

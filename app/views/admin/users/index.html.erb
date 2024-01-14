@@ -1,0 +1,35 @@
+<div>
+  <div>
+    <div>
+      <h1>user_index</h1> 
+    </div>
+  </div>
+  <div class= "row">
+    <% @users.each do |user| %>
+      <div class= "col-10">
+        <%= link_to admin_user_path(user) do %>
+          <!--会員氏名-->
+          <%= user.name %>
+        <% end %>
+        <%= user.email %>
+        <% if user.is_active == false %>
+          <b class="text-success font-weight-bold">無効</b>
+        <% else %>
+          <b class="text-success font-weight-bold">有効</b>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

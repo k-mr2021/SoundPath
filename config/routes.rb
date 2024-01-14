@@ -6,6 +6,10 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
   
+  namespace :admin do
+    resources :users, only: [:index, :show, :edit, :update]
+  end
+  
   # ユーザー用
   # URL /usees/s/sign_in 
   devise_for :users, skip: [:passwords], controllers: {
@@ -23,5 +27,6 @@ Rails.application.routes.draw do
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
+
 
 

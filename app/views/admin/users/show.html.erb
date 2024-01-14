@@ -1,0 +1,39 @@
+<div>
+  <div>
+    <div>
+      <h3><%= @user_found.name %>さんのユーザー詳細</h3>
+    </div>
+  </div>
+  <div>
+    <div>
+      <b>User_ID</b>
+      <%= @user_found.id %>
+    </div>
+    <div>
+      <b>Name</b>
+      <%= @user_found.name %>
+    </div>
+    <div>
+      <b>Email</b>
+      <%= @user_found.email %>
+    </div>
+    <div>
+      <b>Status</b>
+      <% if @user_found.is_active == false %>
+          <b class="text-success font-weight-bold">無効</b>
+        <% else %>
+          <b class="text-success font-weight-bold">有効</b>
+        <% end %>
+    </div>
+    <div>
+      <%= link_to "編集", edit_admin_user_path(@user_found) %>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
