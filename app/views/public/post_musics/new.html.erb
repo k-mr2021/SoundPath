@@ -1,0 +1,8 @@
+<h3>Upload a track</h3>
+<%= form_with model: @post_music do |f| %>
+   <%= f.label :title %>
+  <%= f.text_field :title %>
+  <%= f.label :file %>
+  <%= f.file_field :file %>
+  <%= f.submit "送信" %>
+<% end %>

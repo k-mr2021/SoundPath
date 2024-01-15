@@ -1,0 +1,10 @@
+ <% @post_musics.each do |t| %>
+    <div>
+      <%= t.body %>
+　　　　<audio src= "<%= "#{t.file}" %>" controls="">
+         <a src="<%= "#{t.file}" %>">ダウンロード</a>
+       </audio>
+    </div>
+  <% end %>
+  
+  

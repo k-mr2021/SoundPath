@@ -17,3 +17,5 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
+// audiojsの読み込み
+//= require audiojs
