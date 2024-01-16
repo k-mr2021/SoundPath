@@ -13,6 +13,26 @@ class Public::PostMusicsController < ApplicationController
   
   def index
     @post_musics = PostMusic.all
+    @user_found = User.find(current_user.id)
+  end
+  
+  def edit
+    @post_music = PostMusic.find(params[:id])
+  end
+  
+  def update
+    @post_music = PostMusic.find(params[:id])
+    if @post_music.update(post_music_params)
+      redirect_to post_musics_path(@post_music.id)
+    else
+      render :edit
+    end
+  end
+  
+  def destroy
+    post_music = PostMusic.find(params[:id])
+    post_music.destroy
+    redirect_to post_musics_path
   end
   
   private
@@ -22,5 +42,8 @@ def post_music_params
 end
   
 end
+
+
+
 
 
