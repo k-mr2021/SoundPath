@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   
   scope module: :public do
     root to: 'homes#top'
+    # 検索
+    get "search" => "search#search"
     # 退会確認画面
     get '/users/check' => 'users#check', as: 'check'
     # 退会処理(ステータス更新)
