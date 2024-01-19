@@ -1,0 +1,63 @@
+<div>
+  <div>
+    <h5>ArtistsまたはTracksを検索</h5>
+    <div>
+      <%= form_with url: search_index_path, local: true, method: :get do |f| %>
+        <%= f.text_field :keyword %>
+        <%= f.submit '検索' %>
+      <% end %>
+    </div>
+  </div>
+  <div>
+    <div>
+      <% if @keyword.present? %>
+        <%= "#{@keyword}の検索結果" %>
+      <% end %>
+    </div>
+  </div>
+  <% if @users == [] %>
+    <h5>Artistsの検索結果はありません</h5>
+  <% end %>
+  <div>
+    <% @users.each do |user| %>
+      <div>
+        <b>Artists</b><br>
+        <%= user.name %>
+      </div>
+    <% end %>
+  </div>
+  <% if @post_musics == [] %>
+    <h5>Tracksの検索結果はありません</h5>
+  <% end %>
+  <div>
+    <% @post_musics.each do |post_music| %>
+      <div>
+        <b>Tracks</b><br>
+        <%= post_music.title %>
+        <%= post_music.body %>
+  　　　　<audio src= "<%= "#{post_music.file}" %>" controls="">
+           <a src="<%= "#{post_music.file}" %>">ダウンロード</a>
+         </audio>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

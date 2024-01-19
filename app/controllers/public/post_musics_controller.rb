@@ -14,6 +14,7 @@ class Public::PostMusicsController < ApplicationController
   def index
     @post_musics = PostMusic.all
     @user_found = User.find(current_user.id)
+
   end
   
   def edit
@@ -39,6 +40,10 @@ class Public::PostMusicsController < ApplicationController
 
 def post_music_params
   params.require(:post_music).permit(:body, :file, :title) 
+end
+
+def search_params
+  params.permit(:keyword)
 end
   
 end
