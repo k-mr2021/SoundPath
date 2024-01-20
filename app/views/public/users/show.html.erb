@@ -1,6 +1,39 @@
-<h1>user詳細</h1>
-<%= @user.name %>
-<%= link_to "編集する" , edit_user_path %>
+<div>
+  <div>
+    <div>
+      <p>img</p>
+      <%= @user.name %>
+      <%= link_to "編集する" , edit_user_path %>
+    </div>
+  </div>
+  <div>
+    <div>
+      <% @post_musics.each do |post_music| %>
+        <%= link_to user_path(post_music.user_id) do %>
+          <%= post_music.user.name %>
+        <% end %>
+        <%= link_to post_music_path(post_music.user_id) do %>
+          <%= post_music.title %>
+        <% end %>
+        <%= post_music.body %>
+        <audio src= "<%= "#{post_music.file}" %>" controls="">
+          <a src="<%= "#{post_music.file}" %>">ダウンロード</a>
+        </audio>
+        <p><%= link_to "#{post_music.post_comments.count} comments", post_music_path(post_music.id) %></p>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+    
+    
     
     
     

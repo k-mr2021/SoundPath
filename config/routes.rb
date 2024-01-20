@@ -18,13 +18,16 @@ Rails.application.routes.draw do
   }
   
   scope module: :public do
+    # ルート画面
     root to: 'homes#top'
     # 退会確認画面
     get '/users/check' => 'users#check', as: 'check'
     # 退会処理(ステータス更新)
     patch '/users/withdrawal' => 'userss#withdrawal', as: 'withdrawal'
     resources :users, only: [:show, :edit, :update]
-    resources :post_musics
+    resources :post_musics do
+      resources :post_comments, only: [:create, :destroy]  
+    end
     resources :searches, only: :index, as: :search
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

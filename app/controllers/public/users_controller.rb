@@ -2,7 +2,8 @@ class Public::UsersController < ApplicationController
   before_action :authenticate_user!
   
   def show
-    @user = User.find(current_user.id)
+    @user = User.find(params[:id])
+    @post_musics= @user.post_musics
   end
   
   def check
@@ -27,5 +28,8 @@ class Public::UsersController < ApplicationController
   end
   
 end
+
+
+
 
 

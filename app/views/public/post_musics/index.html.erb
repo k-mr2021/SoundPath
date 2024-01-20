@@ -1,15 +1,27 @@
  <% @post_musics.each do |post_music| %>
     <div>
-      <%= link_to edit_post_music_path(post_music.id) do %>
-        <%= @user_found.name %>
+      <%= post_music.user.name %><br>
+      <%= link_to post_music_path(post_music.id) do %>
+        <%= post_music.title %>
       <% end %>
-      <%= post_music.title %>
       <%= post_music.body %>
 　　　　<audio src= "<%= "#{post_music.file}" %>" controls="">
          <a src="<%= "#{post_music.file}" %>">ダウンロード</a>
        </audio>
     </div>
   <% end %>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
   
   
   

@@ -13,8 +13,11 @@ class Public::PostMusicsController < ApplicationController
   
   def index
     @post_musics = PostMusic.all
-    @user_found = User.find(current_user.id)
-
+  end
+  
+  def show
+    @post_music= PostMusic.find(params[:id])
+    @post_comment = PostComment.new
   end
   
   def edit
@@ -47,6 +50,10 @@ def search_params
 end
   
 end
+
+
+
+
 
 
 

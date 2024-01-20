@@ -1,7 +1,10 @@
 class PostMusic < ApplicationRecord
-  belongs_to :user
+  
   has_one_attached :audio
   mount_uploader :file, AudiofileUploader
+  
+  belongs_to :user
+  has_many :post_comments, dependent: :destroy
   
   def self.search(keyword)
     if keyword.present?

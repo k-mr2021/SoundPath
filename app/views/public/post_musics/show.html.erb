@@ -1,0 +1,59 @@
+<div>
+  <div>
+    <div>
+      <h6><%= @post_music.title %></h6><br>
+      <%= link_to user_path(@post_music.user_id) do %>
+        <%= @post_music.user.name %>
+      <% end %>
+      <%= @post_music.body %>
+      <audio src= "<%= "#{@post_music.file}" %>" controls="">
+        <a src="<%= "#{@post_music.file}" %>">ダウンロード</a>
+      </audio>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div>
+        <p>img</p>
+        <%= @post_music.user.name %>
+        <p>フォロワー</p>
+         <p>リリース</p><%= @post_music.created_at.strftime('%Y/%m/%d') %>
+      </div>
+      <div>
+        <%= form_with model: [@post_music, @post_comment] do |f| %>
+          <%= f.text_area :comment, rows: '3', placeholder: "Write a comment" %>
+          <%= f.submit "送信する" %>
+        <% end %>
+      </div>
+      <div>
+        <p>comments：<%= @post_music.post_comments.count %></p>
+        <% @post_music.post_comments.each do |post_comment| %>
+          <%= post_comment.user.name %>
+          <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
+          <% if post_comment.user == current_user %>
+            <%= link_to "削除", post_music_post_comment_path(post_comment.post_music, post_comment), method: :delete %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
