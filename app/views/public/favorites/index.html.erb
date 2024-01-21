@@ -1,0 +1,5 @@
+<h5>お気に入り一覧</h5>
+<% @favorites.each do |favorite| %>
+  <%= link_to favorite.post_music.title, post_music_path(favorite.post_music) %>
+<% end %>
+

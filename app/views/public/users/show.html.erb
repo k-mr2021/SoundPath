@@ -1,9 +1,19 @@
 <div>
   <div>
     <div>
+      <h5><%= @user_found.name %>のプロフィール</h5>
       <p>img</p>
-      <%= @user.name %>
+      <%= @user_found.name %>
       <%= link_to "編集する" , edit_user_path %>
+    </div>
+  </div>
+  <div>
+    <div>
+      <h5>お気に入り</h5>
+      <% @favorites.each do |favorite| %>
+        <%= link_to favorite.post_music.user.name, user_path(favorite.post_music.user) %>
+        <%= link_to favorite.post_music.title, post_music_path(favorite.post_music) %>
+      <% end %>
     </div>
   </div>
   <div>
@@ -32,6 +42,13 @@
 
 
 
+
+
+
+
+
+
+    
     
     
     

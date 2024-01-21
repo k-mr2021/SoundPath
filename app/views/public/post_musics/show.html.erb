@@ -1,9 +1,9 @@
 <div>
   <div>
     <div>
-      <h6><%= @post_music.title %></h6><br>
+      <h6><%= @post_music.title %></h6>
       <%= link_to user_path(@post_music.user_id) do %>
-        <%= @post_music.user.name %>
+        <%= @post_music.user.name %><br>
       <% end %>
       <%= @post_music.body %>
       <audio src= "<%= "#{@post_music.file}" %>" controls="">
@@ -12,18 +12,32 @@
     </div>
   </div>
   <div>
+    <%= form_with model: [@post_music, @post_comment] do |f| %>
+      <%= f.text_area :comment, rows: '3', placeholder: "Write a comment" %>
+      <%= f.submit "送信する" %>
+    <% end %>
+  </div>
+  <p>♥ Like <%= @post_music.favorites.count %></p>
+  <% if @post_music.favorited_by?(current_user) %>
+    <p>
+      <%= link_to post_music_favorite_path(@post_music), method: :delete do %>
+        ♥<% @post_music.favorites %> 
+      <% end %>
+    </p>
+    <% else %>
+      <p>
+        <%= link_to post_music_favorite_path(@post_music), method: :post do %>
+          ♡<% @post_music.favorites %> 
+        <% end %>
+      </p>
+    <% end %>
+  <div>
     <div>
       <div>
         <p>img</p>
         <%= @post_music.user.name %>
         <p>フォロワー</p>
          <p>リリース</p><%= @post_music.created_at.strftime('%Y/%m/%d') %>
-      </div>
-      <div>
-        <%= form_with model: [@post_music, @post_comment] do |f| %>
-          <%= f.text_area :comment, rows: '3', placeholder: "Write a comment" %>
-          <%= f.submit "送信する" %>
-        <% end %>
       </div>
       <div>
         <p>comments：<%= @post_music.post_comments.count %></p>
@@ -38,6 +52,16 @@
     </div>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
 
 
 

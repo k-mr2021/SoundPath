@@ -26,12 +26,19 @@ Rails.application.routes.draw do
     patch '/users/withdrawal' => 'userss#withdrawal', as: 'withdrawal'
     resources :users, only: [:show, :edit, :update]
     resources :post_musics do
-      resources :post_comments, only: [:create, :destroy]  
+      resources :post_comments, only: [:create, :destroy]
+      resource :favorite, only: [:create, :destroy]
+      get 'favorite', to: 'favorites#index', on: :member
     end
     resources :searches, only: :index, as: :search
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
+
+
+
+
+
 
 
 

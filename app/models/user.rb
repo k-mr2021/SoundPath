@@ -6,6 +6,7 @@ class User < ApplicationRecord
          
   has_many :post_musics, dependent: :destroy
   has_many :post_comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
   
   # 検索機能
   def self.search(keyword)
