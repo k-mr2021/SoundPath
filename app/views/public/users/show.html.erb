@@ -1,10 +1,27 @@
 <div>
   <div>
     <div>
-      <h5><%= @user_found.name %>のプロフィール</h5>
       <p>img</p>
+      <h5><%= @user_found.name %></h5>
       <%= @user_found.name %>
+      <%= @user_found.introduction %>
       <%= link_to "編集する" , edit_user_path %>
+      <% if current_user != @user_found %>
+        <% if current_user.following?(@user_found) %>
+          <%= link_to "Unfollow", user_relationships_path(@user_found.id), method: :delete %>
+        <% else %>
+          <%= link_to "Follow", user_relationships_path(@user_found.id), method: :post %>
+        <% end %>
+      <% end %>
+    </div>
+    
+  </div>
+  <div>
+    <div>
+      <b>Followings</b>
+      <%= link_to @user_found.followings.count, user_followings_path(@user_found.followings) %>
+      <b>Followers</b>
+      <%= link_to @user_found.followers.count, user_followers_path(@user_found.followers) %>
     </div>
   </div>
   <div>
@@ -48,6 +65,21 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
     
     
     
