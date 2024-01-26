@@ -1,0 +1,12 @@
+<h5>Notifications</h5>
+<% if @notifications.present? %>
+  <%= link_to "Delete all", notification_path(@notifications), method: :delete %>
+  <% @notifications.each do |notification| %>
+    <%= render "#{notification.action_type}", notification: notification %>
+  <% end %>
+<% else %>
+  <b>No notifications</b>
+<% end %>
+
+
+

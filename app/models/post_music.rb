@@ -7,7 +7,8 @@ class PostMusic < ApplicationRecord
   belongs_to :user
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
-  has_many :notifications, as: :subject, dependent: :destroy
+  
+  has_one :notifications, as: :subject, dependent: :destroy
   
   # 検索機能
   def self.search(keyword)
@@ -22,6 +23,7 @@ class PostMusic < ApplicationRecord
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
+  
   
 end
 
