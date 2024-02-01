@@ -1,2 +1,3 @@
 module Public::NotificationsHelper
 end
+

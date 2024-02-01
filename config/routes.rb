@@ -33,10 +33,14 @@ Rails.application.routes.draw do
       get 'favorite', to: 'favorites#index', on: :member
     end
     resources :searches, only: :index, as: :search
-    resources :notifications, only: [:index, :destroy]
+    resources :notifications, only: [:index] do
+      patch :read, on: :member
+    end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
+
+
 
 
 

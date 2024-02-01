@@ -1,12 +1,20 @@
-<h5>Notifications</h5>
+<h5>通知一覧</h5>
 <% if @notifications.present? %>
-  <%= link_to "Delete all", notification_path(@notifications), method: :delete %>
   <% @notifications.each do |notification| %>
-    <%= render "#{notification.action_type}", notification: notification %>
+    <%= link_to read_user_notification_path(current_user.name_id,notification), method: :patch do %>
+      <%= render "#{notification.action_type}", notification: notification %>
+    <% end %>
   <% end %>
 <% else %>
-  <b>No notifications</b>
+  <b>通知はありません</b>
 <% end %>
+
+
+
+
+
+
+
 
 
 

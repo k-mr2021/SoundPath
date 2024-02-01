@@ -1,0 +1,11 @@
+<%= link_to transition_path(notification) do %>
+  <% if notification.subject.follower.guest? %>
+    ゲストユーザー
+  <% else %>
+    <%= link_to notification.subject.follower.name, user_path(notification.subject.follower) %>
+  <% end %>
+  があなたをフォローしました
+  <%= notification.created_at.strftime('%Y/%m/%d %H:%M') %>
+<% end %>
+
+

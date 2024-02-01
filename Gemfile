@@ -61,3 +61,4 @@ gem 'carrierwave'
 
 gem 'audiojs-rails'
 
+gem "enum_help"
