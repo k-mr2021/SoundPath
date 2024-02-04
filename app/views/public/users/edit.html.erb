@@ -1,3 +1,31 @@
-<h1>user編集</h1>
-<%= link_to "退会する", check_path %>
+<div>
+  <div>
+    <div>
+      <h1>User情報編集</h1>
+    </div>
+  </div>
+  <%= form_with model: @user_found do |f| %>
+    <div>
+      <div>
+        <p>Image</p>
+        <%= f.file_field :profile_image, accept: "image/*" %>
+        <p>Name</p>
+        <%= f.text_field :name, autofocus: true, id:"inputName" %>
+        <p>Intoroduction</p>
+        <%= f.text_area :introduction, autofocus: true, id:"inputIntroduction" %>
+      </div>
+      <div>
+        <%= f.submit "編集" %>
+      </div>
+      <div>
+        <%= link_to "退会", check_path %>
+      </div>
+    </div>
+  <% end %>
+</div>
+    
+
+
+
+
 

@@ -1,9 +1,0 @@
-<%= link_to transition_path(notification) do %>
-  <%= link_to notification.subject.user.name, user_path(notification.subject.user) %>
-  があなたの
-  <%= link_to "楽曲", post_music_path(notification.subject.post_music) %>
-  にいいねしました
-  <%= notification.created_at.strftime('%Y/%m/%d %H:%M') %>
-<% end %>
-  
-  

@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     get '/users/check' => 'users#check', as: 'check'
     patch '/users/withdrawal' => 'userss#withdrawal', as: 'withdrawal'
-    resources :users, only: [:show, :edit, :update] do
+    resources :users, only: [:show, :index, :edit, :update] do
       resource :relationships, only: [:create, :destroy]
       get "followings" => "relationships#followings", as: "followings"
       get "followers" => "relationships#followers", as: "followers"
@@ -33,12 +33,12 @@ Rails.application.routes.draw do
       get 'favorite', to: 'favorites#index', on: :member
     end
     resources :searches, only: :index, as: :search
-    resources :notifications, only: [:index] do
-      patch :read, on: :member
-    end
+    resources :notifications, only: [:index, :update, :destroy] 
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
+
+
 
 
 

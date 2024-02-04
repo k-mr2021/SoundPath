@@ -1,13 +1,11 @@
-<h5>通知一覧</h5>
-<% if @notifications.present? %>
-  <% @notifications.each do |notification| %>
-    <%= link_to read_user_notification_path(current_user.name_id,notification), method: :patch do %>
-      <%= render "#{notification.action_type}", notification: notification %>
-    <% end %>
-  <% end %>
+<% notifications = @notifications.where.not(visitor_id: current_user.id) %>
+<% if notifications.exists? %>
+  <%= render 'notification', notifications %>
+  <%= paginate notifications.all %>
 <% else %>
-  <b>通知はありません</b>
+  <p>通知はありません</p>
 <% end %>
+
 
 
 

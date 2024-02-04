@@ -1,29 +1,37 @@
 class Public::NotificationsController < ApplicationController
+  before_action :authenticate_user!
   
   def index
-    @notifications = current_user.notifications.order(created_at: :desc)
+    @notifications = current_user.passive_notifications.includes(:visitor, :post_comment, :post_music).page(params[:page]).per(10)
+    @notification = Notification.find_by(id: params[:id])
+    @notification = @notification.decorate if @notification.present?
+    @notifications.update_all(checked: true)
   end
-  
-  def read
-    notification = current_user.notifications.find(params[:id])
-    unless notification.read?
-      notification.update(read: ture)
-    end
-    redirect_to notifications_path
-  end
-  
-  def transition_path(notification)
-    case notification.action_type
-    when :commented_to_own_post
-      post_music_path(notification.subject.post_music, anchor: "comment-#{notification.subject.id}")
-    when :favorited_to_own_post
-      post_music_path(notification.subject.post_music)
-    when :followed_me
-      user_path(notification.subject.follower)
+
+  def update
+    notification = Notification.find(params[:id])
+    if notification.update(checked: true)
+      redirect_to notifications_path
     end
   end
-  
+
+  def destroy
+    @notification = Notification.find(params[:id])
+    @notification.destroy
+    respond_to do |format|
+      format.js
+    end
+  end
 end
+
+
+
+
+
+
+
+
+
 
 
 
