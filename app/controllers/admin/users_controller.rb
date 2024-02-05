@@ -2,11 +2,12 @@ class Admin::UsersController < ApplicationController
   before_action :authenticate_admin!
   
   def index
-    @users = User.all
+    @users = User.all.page(params[:page]).per(10)
   end
   
   def show
     @user_found = User.find(params[:id])
+    @post_music= PostMusic.find(params[:id])
   end
   
   def edit
@@ -23,9 +24,10 @@ class Admin::UsersController < ApplicationController
   private
   
   def user_params
-    params.require(:user).permit(:name, :email, :is_active)
+    params.require(:user).permit(:name, :product, :email, :is_active)
   end
 end
+
 
 
 

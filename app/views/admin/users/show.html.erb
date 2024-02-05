@@ -1,35 +1,72 @@
-<div>
-  <div>
-    <div>
-      <h3><%= @user_found.name %>さんの会員情報</h3>
+<div class= "container">
+  <div class="row">
+    <div class= "col">
+      <h3 class="mt-4 mb-2 "><%= @user_found.name %>会員情報</h3>
     </div>
   </div>
-  <div>
-    <div>
-      <b>User_ID</b>
-      <%= @user_found.id %>
+  <div class= "row">
+    <div class= "col-lg-10 col-sm-6">
+      <table class= "table">
+        <tr>
+          <th>User_ID</th>
+          <td><%= @user_found.id %></td>
+        </tr>
+        <tr>
+          <th>Name</th>
+          <td><%= @user_found.name %></td>
+        </tr>
+        <tr>
+          <th>Email</th>
+          <td><%= @user_found.email %></td>
+        </tr>
+        <tr>
+          <th>Introduction</th>
+          <td><%= @user_found.introduction %></td>
+        </tr>
+        <tr>
+          <th>Status</th>
+          <td>
+            <% if @user_found.is_active == false %>
+              <b class="text-success font-weight-bold">無効</b>
+            <% else %>
+              <b class="text-success font-weight-bold">有効</b>
+            <% end %>
+          </td>
+        </tr>
+      </table>
     </div>
-    <div>
-      <b>Name</b>
-      <%= @user_found.name %>
+  </div>
+  <b>Tracks</b>
+  <div class= "row">
+    <div class= "col-lg-10 col-sm-6">
+        <%= @post_music.user.name %> - 
+        <%= @post_music.title %><br>
+        <%= @post_music.body %>
+        <audio src= "<%= "#{@post_music.file}" %>" controls="">
+          <a src="<%= "#{@post_music.file}" %>">ダウンロード</a>
+        </audio>
     </div>
-    <div>
-      <b>Email</b>
-      <%= @user_found.email %>
-    </div>
-    <div>
-      <b>Status</b>
-      <% if @user_found.is_active == false %>
-          <b class="text-success font-weight-bold">無効</b>
-        <% else %>
-          <b class="text-success font-weight-bold">有効</b>
-        <% end %>
-    </div>
-    <div>
-      <%= link_to "編集", edit_admin_user_path(@user_found) %>
-    </div>
+  </div>
+  <div class ="row justify-content-center">
+    <%= link_to "ステータス変更", edit_admin_user_path(@user_found), class:"btn btn-success my-1 mx-4 px-4" %>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

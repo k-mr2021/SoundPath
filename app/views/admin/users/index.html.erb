@@ -1,26 +1,59 @@
-<div>
-  <div>
-    <div>
-      <h1>user_index</h1> 
+<div class= "container">
+  <div class= "row">
+    <div class= "col">
+      <h4 class= "mt-4 mb-2">User</h4> 
     </div>
   </div>
   <div class= "row">
-    <% @users.each do |user| %>
-      <div class= "col-10">
-        <%= link_to admin_user_path(user) do %>
-          <!--会員氏名-->
-          <%= user.name %>
+    <div class= "col-lg-10 col-sm-6">
+      <table class= "table">
+        <thead class= "thead-light">
+          <tr>
+            <th>User_ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Status</th>
+          </tr>  
+        </thead>
+        <% @users.each do |user| %>
+          <tbody>
+            <tr>
+              <!--userID-->
+              <td><%= user.id %></td>
+              <!--user詳細へのリンク-->
+              <td>
+                <%= link_to admin_user_path(user) do %>
+                  <!--userName-->
+                  <%= user.name %>
+                <% end %>
+              </td>
+              <!--userEmail-->
+              <td><%= user.email %></td>
+              <!--userStatus-->
+              <td>
+                <% if user.is_active == false %>
+                  <p class="text-success font-weight-bold">無効</p>
+                <% else %>
+                  <p class="text-success font-weight-bold">有効</p>
+                <% end %>
+              </td>
+            </tr>
+          </tbody>
         <% end %>
-        <%= user.email %>
-        <% if user.is_active == false %>
-          <b class="text-success font-weight-bold">無効</b>
-        <% else %>
-          <b class="text-success font-weight-bold">有効</b>
-        <% end %>
-      </div>
-    <% end %>
+      </table>
+    </div>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
 
 
 

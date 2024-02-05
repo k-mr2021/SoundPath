@@ -1,36 +1,53 @@
-<div>
-  <div>
-    <div>
-      <h3><%= @user_found.name %>さんの会員情報編集</h3>
+<div class= "container">
+  <div class="row">
+    <div class= "col">
+      <h3 class="mt-4 mb-2"><%= @user_found.name %>会員情編集</h3>
     </div>
   </div>
-  <div>
-    <%= form_with model: @user_found, url: admin_user_path, method: :patch do |f| %>
-      <div>
-        <b>User_ID</b>
-        <%= @user_found.id %>
-      </div>
-      <div>
-        <b>Name</b>
-        <%= @user_found.name %>
-      </div>
-      <div>
-        <b>Email</b>
-        <%= @user_found.email %>
-      </div>
-      <div>
-        <b>Status</b>
-        <%= f.radio_button :is_active, true %>
-          <%= f.label :"有効" %>
-          <%= f.radio_button :is_active, false %>
-          <%= f.label :"無効" %>
-      </div>
-      <div>
-        <%= f.submit "変更を保存" %>
-      </div>
-    <% end %>
+  <div class= "row">
+    <div class= "col-lg-10 col-sm-6">
+      <!--更新メソッド-->
+      <%= form_with model: @user_found, url: admin_user_path, method: :patch do |f| %>
+        <table class= "table table-borderless">
+          <tr>
+            <th>User_ID</th>
+            <td><%= @user_found.id %></td>
+          </tr>
+          <tr>
+            <th><%= f.label :"Name" %></th>
+            <td><%= f.text_field :name, size: "30x5" %><td>
+          </tr>
+          <tr>
+            <th><%= f.label :"Email" %></th>
+            <td><%= f.text_field :email, size: "30x5" %><td>
+          </tr>
+          <tr>
+            <th><%= f.label :"Introduction" %></th>
+            <td><%= f.text_field :introduction, size: "30x5" %><td>
+          </tr>
+          <tr>
+            <th><%= f.label :"Status" %></th>
+            <td>
+              <%= f.radio_button :is_active, true %>
+              <%= f.label :"有効" %>
+              <%= f.radio_button :is_active, false %>
+              <%= f.label :"無効" %>
+            </td>
+          </tr>
+          <tr>
+            <th></th>
+            <td><%= f.submit "ステータス更新", class:"btn btn-success px-4" %></td>
+          </tr>
+        </table>
+      <% end %>
+    </div>  
   </div>
 </div>
+
+
+
+
+
 
 
 
