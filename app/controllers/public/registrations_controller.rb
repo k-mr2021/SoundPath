@@ -63,7 +63,15 @@ class Public::RegistrationsController < Devise::RegistrationsController
     user_path(current_user)
   end
   
+  def ensure_normal_user
+    if resource.email == 'guest.user@example.com'
+      redirect_to user_session_path, alert: 'ゲストユーザーは削除できません。'
+    end
+  end
+  
 end
+
+
 
 
 

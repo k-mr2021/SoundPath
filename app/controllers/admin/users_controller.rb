@@ -7,7 +7,9 @@ class Admin::UsersController < ApplicationController
   
   def show
     @user_found = User.find(params[:id])
-    @post_music= PostMusic.find(params[:id])
+    @post_music= PostMusic.find_by(user: @user_found)
+    # 投稿がない場合
+    @post_music_exists = @post_music.present?
   end
   
   def edit

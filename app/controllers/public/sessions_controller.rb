@@ -34,6 +34,13 @@ class Public::SessionsController < Devise::SessionsController
     root_path
   end
   
+  # ゲストログイン
+  def guest_sign_in
+    user = User.guest
+    sign_in user
+    redirect_to user_path(current_user), notice: 'ゲストユーザーとしてログインしました。'
+  end
+  
   # 退会機能
   private
   # アクティブであるか判断
@@ -55,5 +62,6 @@ class Public::SessionsController < Devise::SessionsController
     end
   end
 end
+
 
 

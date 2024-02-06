@@ -9,24 +9,69 @@
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
-  <body>
-    <header>
-      <% if user_signed_in? %>
-        <li>
-          <%= link_to "通知一覧", notifications_path %>
-        </li>
-        <li>
-          <%= link_to "log-out", destroy_user_session_path, method: :delete %>
-        </li>
-      <% else %>
-        <li>
-          <%= link_to "sign-up", new_user_registration_path %>
-        </li>
-        <li>
-          <%= link_to "log-in", new_user_session_path %>
-        </li>
-      <% end %>
+  <body class= "d-flex flex-column vh-100">
+    <header class= "shadow-sm">
+      <nav class= "navbar navbar-expand-lg navbar-light">
+        <div class="container">
+          <%= link_to "SoundPath", root_path, class: "navbar-brand p-3" %>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class= "row justify-content-end">
+            <!--Adminのヘッダー-->
+            <div class= "collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class= "navbar-nav ">
+                <% if admin_signed_in? %>
+                  <li class= "nav-item">
+                    <%= link_to "All Users", admin_users_path, class: "btn btn-outline-secondary mx-3 my-1" %>
+                  </li>
+                  <li class= "nav-item">
+                    <%= link_to "Log out", destroy_admin_session_path, method: :delete, class: "btn btn-outline-secondary mx-3 my-1" %>
+                  </li>
+                <!--Userのヘッダー-->
+                <% elsif user_signed_in? %>
+                  <li class= "nav-item">
+                    <%= link_to "My Page", user_path(current_user), class: "btn btn-outline-secondary mx-3 my-1" %>
+                  </li>
+                   <li class= "nav-item">
+                    <%= link_to "All Tracks", post_musics_path, class: "btn btn-outline-secondary mx-3 my-1" %>
+                  <li>
+                    <%= link_to "通知一覧", notifications_path, class: "btn btn-outline-secondary mx-3 my-1" %>
+                  </li>
+                  <li class= "nav-item">
+                    <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-outline-secondary mx-3 my-1" %>  
+                  </li>
+                <!--User、Admin共通-->
+                <% else %>
+                  <li class="nav-item">
+                    <%= link_to "About", about_path, class: "btn btn-outline-secondary mx-3 my-1" %>
+                  </li>
+                  <li>
+                    <%= link_to "Sign up", new_user_registration_path, class: "btn btn-outline-secondary mx-3 my-1" %>
+                  </li>
+                  <li class= "nav-item">
+                    <%= link_to "Log in", new_user_session_path, class: "btn btn-outline-secondary mx-3 my-1" %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div class= "container">
+        <div class= "row justify-content-end">
+          <div class= "col-xs-4">
+            <div class= "input-group mb-3">
+              <!--検索窓-->
+              <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1">
+                <div class="input-group-append">
+                  <button class="btn btn-secondary" type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </header>
     <%= yield %>
   </body>

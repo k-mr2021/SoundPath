@@ -15,19 +15,21 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show, :edit, :update]
   end
   
+  
   # ユーザー用
-  # URL /usees/s/sign_in 
+  # URL /users/sign_in 
   devise_for :users, skip: [:passwords], controllers: {
     registrations: 'public/registrations',
     sessions: 'public/sessions'
   }
   # ゲストログイン
   devise_scope :user do
-    post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
+    post 'users/guest_sign_in', to: 'public/sessions#guest_sign_in'
   end
   # namespace
   scope module: :public do
     root to: 'homes#top'
+    get '/about' => 'homes#about'
     get '/users/check' => 'users#check', as: 'check'
     patch '/users/withdrawal' => 'userss#withdrawal', as: 'withdrawal'
     resources :users, only: [:show, :index, :edit, :update] do
@@ -46,6 +48,13 @@ Rails.application.routes.draw do
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
+
+
+
+
+
+
+
 
 
 
