@@ -1,37 +1,51 @@
-<h2>Sign up</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "public/shared/error_messages", resource: resource %>
-  
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+<div class= "container">
+  <div class= "row">
+    <h3 class="text-center col mt-4 mb-2 ">Sign up</h3>
   </div>
-  
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "public/shared/error_messages", resource: resource %>
+    <div class= "row justify-content-center">
+      <div class= "col-lg-auto col-sm-auto col-auto mb-5 mt-5">
+        <%= f.label :Name %><br />
+        <%= f.text_field :name, size: "40x5", autofocus: true %>
+      </div>
+    </div>
+    <div class= "row justify-content-center">
+      <div class= "col-lg-auto col-sm-auto col-auto mb-5">
+        <%= f.label :Email %><br />
+        <%= f.email_field :email, size: "40x5", autofocus: true %>
+      </div>
+    </div>
+    <div class= "row justify-content-center">
+      <div class= "col-lg-auto col-sm-auto col-auto mb-5">
+        <%= f.label :Password %>
+        <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %><br />
+        <%= f.password_field :password, size: "40x5", autocomplete: "new-password" %>
+      </div>
+    </div>
+    <div class= "row justify-content-center">
+      <div class= "col-lg-auto col-sm-auto col-auto mb-5">
+        <%= f.label :Password_confirmation %><br />
+        <%= f.password_field :password_confirmation, size: "40x5", autocomplete: "new-password" %>
+      </div>
+    </div>
+    <div class= "row justify-content-center">
+      <div class= "col-lg-auto col-sm-auto col-auto mb-5">
+        <%= f.submit "Sign up", class: "btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+</div>
 <%= render "public/shared/links" %>
+
+
+
+
+
+
+
 
 
 

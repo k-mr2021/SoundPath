@@ -2,33 +2,49 @@
   <div class= "row">
     <h3 class="text-center col mt-4 mb-2 ">管理者ログイン</h3>
   </div>   
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <div class= "row">
-          <div class= "text-center col-lg col-sm-6 mb-5 mt-5">
-            <%= f.label "メールアドレス", class: "mr-3" %>
-            <%= f.email_field :email, size: "40x5", autofocus: true, placeholder: "sample@example.com", autocomplete: "email" %>
-          </div>
-        </div>
-        <div class= "row">
-          <div class= "text-center col-lg col-sm-6" >
-            <%= f.label "パスワード", class: "mr-5" %>
-            <%= f.password_field :password, size: "40x5", autocomplete: "current-password" %>
-          </div>
-        </div>
-        <div class= "row">
-          <div class="actions col-lg col-sm-6 text-center">
-            <%= f.submit "ログイン", class: "btn btn-primary mt-3 ml-6" %>
-          </div>
-        </div>
-        <div class= "row">
-          <div class="actions col-lg col-sm-6 text-center">
-            <%= link_to 'ゲストログイン', admin_guest_sign_in_path, method: :post, class: "btn btn-primary mt-3 ml-6" %>
-          </div>
-        </div>
-      <% end %>
-      
-      <%= render "admin/shared/links" %>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class= "row justify-content-center">
+      <div class= "col-lg-auto col-sm-auto col-auto mb-5 mt-5">
+        <%= f.label :Email %><br />
+        <%= f.email_field :email, size: "40x5", autofocus: true, placeholder: "sample@example.com" %>
+      </div>
+    </div>
+    <div class= "row justify-content-center">
+      <div class= "col-lg-auto col-sm-auto col-auto mb-5" >
+        <%= f.label :Password %><br />
+        <%= f.password_field :password, size: "40x5" %>
+      </div>
+    </div>
+    <div class= "row justify-content-center">
+      <div class= "col-lg-auto col-sm-auto col-auto mb-5">
+        <%= f.submit "Log in", class: "btn btn-primary" %>
+      </div>
+    </div>
+    <div class= "row justify-content-center">
+      <div class= "col-lg-auto col-sm-auto col-auto">
+        <%= link_to 'ゲストログイン', admin_guest_sign_in_path, method: :post, class: "btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
 </div>
+<!--<%= render "admin/shared/links" %>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

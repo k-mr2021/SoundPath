@@ -1,34 +1,66 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<div class= "container">
+  <div class= "row">
+    <h3 class="text-center col mt-4 mb-2 ">Log in</h3>
+  </div> 
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class= "row justify-content-center">
+      <div class= "col-lg-auto col-sm-auto col-auto mb-5 mt-5">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, size: "40x5", autofocus: true, placeholder: "sample@example.com" %>
+      </div>
+    </div>
+    <div class= "row justify-content-center">
+      <div class= "col-lg-auto col-sm-auto col-auto mb-5" >
+        <%= f.label :password %><br />
+        <%= f.password_field :password, size: "40x5" %>
+      </div>
+    </div>
+    <div class= "row justify-content-center">
+      <div class= "col-lg-auto col-sm-auto col-auto mb-5" >
+        <%= f.submit "Log in", class: "btn btn-primary" %>
+      </div>
+    </div>
+    <div class= "row justify-content-center">
+      <div class="col-lg-auto col-sm-auto col-auto mb-5">
+        <%= link_to 'Guest', users_guest_sign_in_path, method: :post, class: "btn btn-primary" %>
+      </div>
     </div>
   <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-  <div class= "row">
-    <div class="actions col-lg col-sm-6 text-center">
-      <%= link_to 'ゲストログイン', users_guest_sign_in_path, method: :post, class: "btn btn-primary mt-3 ml-6" %>
-    </div>
-  </div>
-<% end %>
-
+</div>
 <%= render "public/shared/links" %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
