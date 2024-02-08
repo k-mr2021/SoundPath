@@ -8,9 +8,10 @@
 
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/92515f994e.js" crossorigin="anonymous"></script>
   </head>
   <body class= "d-flex flex-column vh-100">
-    <header class= "shadow-sm">
+    <header class= "sticky-top shadow-sm">
       <nav class= "navbar navbar-expand-lg navbar-light">
         <div class="container">
           <%= link_to "SoundPath", root_path, class: "navbar-brand p-3" %>
@@ -24,34 +25,38 @@
               <ul class= "navbar-nav ">
                 <% if admin_signed_in? %>
                   <li class= "nav-item">
-                    <%= link_to "All Users", admin_users_path, class: "btn btn-outline-secondary mx-3 my-1" %>
+                    <%= link_to "All Users", admin_users_path, class: "btn btn-outline-secondary mx-1 my-1" %>
                   </li>
                   <li class= "nav-item">
-                    <%= link_to "Log out", destroy_admin_session_path, method: :delete, class: "btn btn-outline-secondary mx-3 my-1" %>
+                    <%= link_to "Log out", destroy_admin_session_path, method: :delete, class: "btn btn-outline-secondary mx-1 my-1" %>
                   </li>
                 <!--Userのヘッダー-->
                 <% elsif user_signed_in? %>
                   <li class= "nav-item">
-                    <%= link_to "My Page", user_path(current_user), class: "btn btn-outline-secondary mx-3 my-1" %>
+                    <%= link_to "My Page", user_path(current_user), class: "btn btn-outline-secondary mx-1 my-1" %>
                   </li>
                    <li class= "nav-item">
-                    <%= link_to "All Tracks", post_musics_path, class: "btn btn-outline-secondary mx-3 my-1" %>
+                    <%= link_to "All Tracks", post_musics_path, class: "btn btn-outline-secondary mx-1 my-1" %>
                   <li>
-                    <%= link_to "通知一覧", notifications_path, class: "btn btn-outline-secondary mx-3 my-1" %>
+                    <%= link_to  notifications_path, class: "btn btn-outline-secondary mx-1 my-1" do %>
+                      <i class="fa-solid fa-bell"></i>
+                    <% end %>
                   </li>
                   <li class= "nav-item">
-                    <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-outline-secondary mx-3 my-1" %>  
+                    <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-outline-secondary mx-1 my-1" %>  
                   </li>
+                  
                 <!--User、Admin共通-->
                 <% else %>
                   <li class="nav-item">
-                    <%= link_to "About", about_path, class: "btn btn-outline-secondary mx-3 my-1" %>
+                    <%= link_to "About", about_path, class: "btn btn-outline-secondary mx-1 my-1" %>
                   </li>
                   <li>
-                    <%= link_to "Sign up", new_user_registration_path, class: "btn btn-outline-secondary mx-3 my-1" %>
+                    <!--通知一覧-->
+                    <%= link_to "Sign up", new_user_registration_path, class: "btn btn-outline-secondary mx-1 my-1" %>
                   </li>
                   <li class= "nav-item">
-                    <%= link_to "Log in", new_user_session_path, class: "btn btn-outline-secondary mx-3 my-1" %>
+                    <%= link_to "Log in", new_user_session_path, class: "btn btn-outline-secondary mx-1 my-1" %>
                   </li>
                 <% end %>
               </ul>
@@ -60,15 +65,18 @@
         </div>
       </nav>
       <div class= "container">
-        <div class= "row justify-content-end">
-          <div class= "col-xs-4">
-            <div class= "input-group mb-3">
-              <!--検索窓-->
-              <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1">
-                <div class="input-group-append">
-                  <button class="btn btn-secondary" type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <div class= "row justify-content-center align-items-start">
+          <div class= "col-lg-3 col-sm-5 col-5">
+            <% if user_signed_in? %>
+              <%= form_with url: search_index_path, local: true, method: :get do |f| %>
+                <div class= "input-group">
+                  <%= f.text_field :keyword, class: "form-control", placeholder: "Serch for artists , tracks" %>
+                  <%= button_tag type: "submit", class: "btn btn-secondary" do %>
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                  <% end %>
                 </div>
-            </div>
+              <% end %>
+            <% end %>
           </div>
         </div>
       </div>
@@ -76,6 +84,34 @@
     <%= yield %>
   </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

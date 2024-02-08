@@ -1,0 +1,43 @@
+<div class= "container">
+  <div class= "row　justify-content-center">
+    <div class= "col-lg-6 col-sm-auto col-auto offset-lg-3 offset-sm-3 offset-1">
+      <%= form_with url: search_index_path, local: true, method: :get do |f| %>
+        <div class="input-group">
+          <%= f.text_field :keyword, class: "form-control", placeholder: "Serch for artists , tracks" %>
+          <%= button_tag type: "submit", class: "btn btn-secondary" do %>
+            <i class="fa-solid fa-magnifying-glass"></i>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

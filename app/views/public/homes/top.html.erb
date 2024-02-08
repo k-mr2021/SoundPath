@@ -1,19 +1,25 @@
-<div>
-  <div>
-    <div>
-      <p>アーティスト,トラックを検索</p>
+<div class= "container">
+  <div class= "row justify-content-center">
+    <div class= "col-lg-auto col-sm-auto col-auto mb-5 mt-5">
+      <%= link_to "Log in", new_user_session_path, class: "btn btn-primary mt-5 mb-5 px-3" %><br>
+      <h5 class= "text-center mb-3">または</h5></br>
+      <%= link_to "Sign up", new_user_registration_path, class: "btn btn-primary mb-5" %>
     </div>
   </div>
-  <div>
-    <div>
-      <%= link_to "Log in", new_user_session_path %>
-    </div>
-    <div>
-      <%= link_to "Sign up", new_user_registration_path %>
-    </div>
-  </div>
+</div>
+<%= render "public/searches/searches" %>
   
-  
+
+
+
+
+
+
+
+
+
+
+
 
 
 

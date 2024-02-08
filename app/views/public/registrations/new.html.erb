@@ -22,13 +22,13 @@
         <% if @minimum_password_length %>
           <em>(<%= @minimum_password_length %> characters minimum)</em>
         <% end %><br />
-        <%= f.password_field :password, size: "40x5", autocomplete: "new-password" %>
+        <%= f.password_field :password, size: "40x5" %>
       </div>
     </div>
     <div class= "row justify-content-center">
       <div class= "col-lg-auto col-sm-auto col-auto mb-5">
         <%= f.label :Password_confirmation %><br />
-        <%= f.password_field :password_confirmation, size: "40x5", autocomplete: "new-password" %>
+        <%= f.password_field :password_confirmation, size: "40x5" %>
       </div>
     </div>
     <div class= "row justify-content-center">
@@ -39,6 +39,7 @@
   <% end %>
 </div>
 <%= render "public/shared/links" %>
+
 
 
 
