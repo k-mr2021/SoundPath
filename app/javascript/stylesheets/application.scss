@@ -1,1 +1,39 @@
 @use '~bootstrap/scss/bootstrap';
+
+/*
+ *= require fontawesome
+ */
+
+.custom-audio-player {
+  /* プレイヤーのスタイル */
+
+  /* 以下を追加 */
+  display: flex;
+  align-items: center;
+}
+
+
+.custom-audio-player {
+  /* プレイヤーのサイズを変更 */
+  width: 300px;
+  height: 50px;
+
+  /* 背景色を変更 */
+  background-color: #f1f1f1;
+
+}
+
+.custom-audio-player .play-button {
+  /* プレイヤーボタンのスタイル */
+
+  /* 以下を追加 */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-size: 20px;
+  color: #000;
+}
+
+
+
+
+
