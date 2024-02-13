@@ -3,6 +3,8 @@ class PostMusic < ApplicationRecord
   # 音声ファイル投稿
   has_one_attached :audio
   mount_uploader :file, AudiofileUploader
+  validates :file, format: { with: /\.(mp3|wav)\z/i, message: "はmp3またはwavファイルでなければなりません" }
+  validates :title, presence: true
   
   belongs_to :user
   has_many :post_comments, dependent: :destroy
@@ -77,6 +79,8 @@ class PostMusic < ApplicationRecord
   
   
 end
+
+
 
 
 

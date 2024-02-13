@@ -1,58 +1,162 @@
-<div>
-  <div>
-    <div>
-      <h6><%= @post_music.title %></h6>
-      <%= link_to user_path(@post_music.user_id) do %>
-        <%= @post_music.user.name %><br>
-      <% end %>
-      <%= @post_music.body %>
-      <audio src= "<%= "#{@post_music.file}" %>" controls="">
-        <a src="<%= "#{@post_music.file}" %>">ダウンロード</a>
-      </audio>
-    </div>
-  </div>
-  <div>
-    <%= form_with model: [@post_music, @post_comment] do |f| %>
-      <%= f.text_area :comment, rows: '3', placeholder: "Write a comment" %>
-      <%= f.submit "送信する" %>
-    <% end %>
-  </div>
-  <p>♥ Like <%= @post_music.favorites.count %></p>
-  <% if @post_music.favorited_by?(current_user) %>
-    <p>
-      <%= link_to post_music_favorite_path(@post_music), method: :delete do %>
-        ♥<% @post_music.favorites %> 
-      <% end %>
-    </p>
-    <% else %>
-      <p>
-        <%= link_to post_music_favorite_path(@post_music), method: :post do %>
-          ♡<% @post_music.favorites %> 
-        <% end %>
-      </p>
-    <% end %>
-  <div>
-    <div>
-      <div>
-        <p>img</p>
-        <%= @post_music.user.name %>
-        <p>フォロワー</p>
-         <p>リリース</p><%= @post_music.created_at.strftime('%Y/%m/%d') %>
+<div class= "container py-5">
+  <div class="card mt-4 shadow-lg">
+    <div class="row justify-content-center">
+      <div class="col-xl-auto col-lg-auto col-sm-auto col-auto">
+        <%= @post_music.body %>
+        <audio src= "<%= "#{@post_music.file}" %>" controls="" class="custom-audio-player ml-auto mt-3">
+          <a src="<%= "#{@post_music.file}" %>">ダウンロード</a>
+        </audio>
       </div>
-      <div>
-        <p>comments：<%= @post_music.post_comments.count %></p>
-        <% @post_music.post_comments.each do |post_comment| %>
-          <%= post_comment.user.name %>
-          <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
-          <% if post_comment.user == current_user %>
-            <%= link_to "削除", post_music_post_comment_path(post_comment.post_music, post_comment), method: :delete %>
-            <%= csrf_meta_tags %>
+    </div>
+    <div class="card-body">
+      <div class="row justify-content-center">
+        <div class="col-xl-auto col-lg-auto col-sm-auto col-auto">
+          <%= image_tag @post_music.user.get_profile_image(100,100), class: "rounded-circle mt-2"; %>
+        </div>  
+        <div class="col-lg-auto col-sm-auto col-auto">
+          <p class="card-title">
+            <strong><i class="fa-regular fa-file-audio"></i><span><%= @post_music.title %></span></strong>
+          </p>
+          <%= link_to(user_path(@post_music.user_id), class: "text-dark") do %>
+            <span><i class="fa-solid fa-circle-user"></i><%= @post_music.user.name %></span><br>
           <% end %>
-        <% end %>
+          <span><i class="fa-solid fa-message"></i>：<%= @post_music.post_comments.count %></span> |
+          <% if @post_music.favorited_by?(current_user) %>
+            <%= link_to(post_music_favorite_path(@post_music), class: "text-dark", method: :delete) do %>
+              <span><i class="fa-solid fa-heart"></i> : <%= @post_music.favorites.count %></span><br>
+            <% end %>
+          <% else %>
+            <%= link_to(post_music_favorite_path(@post_music), class: "text-dark", method: :post) do %>
+              <span><i class="fa-solid fa-heart"></i> : <%= @post_music.favorites.count %></span><br>
+            <% end %>
+          <% end %>
+          <span><b>Release : <%= @post_music.created_at.strftime('%Y/%m/%d') %></b></span>
+        </div>
       </div>
     </div>
   </div>
+  <div class="row justify-content-center mt-5">
+    <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12">
+      <%= form_with model: [@post_music, @post_comment] do |f| %>
+        <div style="display: flex; align-items: center;">
+          <%= image_tag current_user.get_profile_image(60,60), class: "rounded-circle"; %>
+          <%= f.text_area :comment, class: "form-control", style: "width:100%", rows: "1", placeholder: "Write a comment" %>
+          <%= button_tag type: "submit", class: "btn btn-secondary" do %>
+            <i class="fa-regular fa-paper-plane"></i>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="row justify-content-center mt-3">
+    <div class="col-xl-auto col-lg-auto col-sm-auto col-auto ">
+      <strong>comments：<%= @post_music.post_comments.count %></strong>
+    </div>
+  </div>
+  <% @post_music.post_comments.each do |post_comment| %>
+    <div class="row justify-content-center mt-3">
+      <div class="col-xl-auto col-lg-auto col-sm-auto col-auto mt-2 ">
+        <%= image_tag  post_comment.user.get_profile_image(50,50), class: "rounded-circle"; %>
+      </div>
+      <span class="border-bottom">  
+        <div class="col-xl-auto col-lg-auto col-sm-auto col-auto mt-2 mb-2">
+          <%= post_comment.user.name %> |
+          <%= post_comment.created_at.strftime('%Y/%m/%d') %><br>
+          <%= post_comment.comment %>
+          <% if post_comment.user == current_user %>
+            <%= link_to(post_music_post_comment_path(post_comment.post_music, post_comment), class: "text-dark ml-2 mt-2", method: :delete) do %>
+              <i class="fa-solid fa-trash"></i>
+              <%= csrf_meta_tags %>
+            <% end %>
+          <% end %>
+        </div>
+      </span>
+    </div>
+  <% end %>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

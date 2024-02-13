@@ -1,0 +1,27 @@
+<h2>Follows</h2>
+  <table class='table'>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td>
+            <%= link_to user_path(user) do %>
+              <%= image_tag user.get_profile_image(50,50), class: "rounded-circle"; %>
+            <% end %>
+          </td>
+          <td><%= user.name %></td>
+          <td>
+            <%= link_to user_followings_path(user) do %>
+              <b>Following<%= user.followings.count %></b>
+            <% end %>
+          </td>
+          <td>  
+            <%= link_to user_followers_path(user) do %>
+              <b>Followers<%= user.followers.count %></b>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table> 
+  
+  

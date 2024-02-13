@@ -20,7 +20,9 @@ class Public::RelationshipsController < ApplicationController
   
   def followers
     user = User.find(params[:user_id])
-    @user = user.follow
+    @users = user.followers
   end
   
 end
+
+

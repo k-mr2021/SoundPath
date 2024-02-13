@@ -7,8 +7,11 @@ class Public::PostMusicsController < ApplicationController
   def create
     @post_music = PostMusic.new(post_music_params)
     @post_music.user_id = current_user.id
-    @post_music.save
-    redirect_to post_musics_path
+    if @post_music.save
+      redirect_to post_musics_path
+    else
+      render :new
+    end
   end
   
   def index
@@ -50,6 +53,7 @@ def search_params
 end
   
 end
+
 
 
 

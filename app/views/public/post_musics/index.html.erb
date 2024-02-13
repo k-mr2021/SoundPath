@@ -1,6 +1,6 @@
 <div class="card-list-container py-5">
-  <% @post_musics.each do |post_music| %>
-    <div class="row">
+  <div class="row">
+    <% @post_musics.each do |post_music| %>
       <div class="col-xl-3 col-lg-5 col-md-7 col-sm-12 col-12">
         <div class="card mt-4 shadow-lg">
           <%= post_music.body %>
@@ -20,15 +20,23 @@
                 </p>
                  <span><i class="fa-solid fa-circle-user"></i><%= post_music.user.name %></span><br>
                  <span><i class="fa-solid fa-message"></i>：<%= post_music.post_comments.count %></span> |
-                 <span><i class="fa-solid fa-heart"></i> : <%= post_music.favorites.count %></span>
+                 <span><i class="fa-solid fa-heart"></i> : <%= post_music.favorites.count %></span><br>
+                 <span><b>Release : <%= post_music.created_at.strftime('%Y/%m/%d') %></b></span>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
+
+
+
+
+
+
+
 
 
 

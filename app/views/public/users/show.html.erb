@@ -1,57 +1,86 @@
-<div>
-  <div>
-    <div>
-      <%= image_tag @user_found.get_profile_image(100,100) %>
-      <h5><%= @user_found.name %></h5>
-      <%= @user_found.introduction %>
-      <% if @user_found == current_user %>
-        <%= link_to "編集" , edit_user_path(@user_found) %>
-      <% end %>
-      <% if current_user != @user_found %>
-        <% if current_user.following?(@user_found) %>
-          <%= link_to "Unfollow", user_relationships_path(@user_found.id), method: :delete %>
-        <% else %>
-          <%= link_to "Follow", user_relationships_path(@user_found.id), method: :post %>
+<div class="container">
+  <div class="card-body">
+    <div class="row justify-content-center">
+      <div class="col-xl-auto col-lg-auto col-sm-auto col-auto">
+        <%= image_tag @user_found.get_profile_image(100,100), class: "rounded-circle mt-2"; %>
+      </div>
+      <div class="col-lg-auto col-sm-auto col-auto">
+        <span><i class="fa-solid fa-circle-user"></i><%= @user_found.name %></span><br>
+        <%= @user_found.introduction %>
+        <% if @user_found == current_user %>
+          <%= link_to "編集" , edit_user_path(@user_found) %>
         <% end %>
-      <% end %>
-    </div>
-    
-  </div>
-  <div>
-    <div>
-      <b>Followings</b>
-      <%= link_to @user_found.followings.count, user_followings_path(@user_found.followings) %>
-      <b>Followers</b>
-      <%= link_to @user_found.followers.count, user_followers_path(@user_found.followers) %>
-    </div>
-  </div>
-  <div>
-    <div>
-      <h5>お気に入り</h5>
-      <% @favorites.each do |favorite| %>
-        <%= link_to favorite.post_music.user.name, user_path(favorite.post_music.user) %>
-        <%= link_to favorite.post_music.title, post_music_path(favorite.post_music) %>
-      <% end %>
-    </div>
-  </div>
-  <div>
-    <div>
-      <% @post_musics.each do |post_music| %>
-        <%= link_to user_path(post_music.user_id) do %>
-          <%= post_music.user.name %>
+        <% if current_user != @user_found %>
+          <% if current_user.following?(@user_found) %>
+            <%= link_to "Unfollow", user_relationships_path(@user_found.id), method: :delete %>
+          <% else %>
+            <%= link_to "Follow", user_relationships_path(@user_found.id), method: :post %>
+          <% end %>
         <% end %>
-        <%= link_to post_music_path(post_music.user_id) do %>
-          <%= post_music.title %>
-        <% end %>
-        <%= post_music.body %>
-        <audio src= "<%= "#{post_music.file}" %>" controls="">
-          <a src="<%= "#{post_music.file}" %>">ダウンロード</a>
-        </audio>
-        <p><%= link_to "#{post_music.post_comments.count} comments", post_music_path(post_music.id) %></p>
-      <% end %>
+      </div>
+    </div>  
     </div>
-  </div>
+    <div>
+      <div>
+        <b>Followings</b>
+        <%= link_to @user_found.followings.count, user_followings_path(@user_found) %>
+        <b>Followers</b>
+        <%= link_to @user_found.followers.count, user_followers_path(@user_found) %>
+      </div>
+    </div>
+    <div>
+      <div>
+        <h5>お気に入り</h5>
+        <% @favorites.each do |favorite| %>
+          <%= link_to favorite.post_music.user.name, user_path(favorite.post_music.user) %>
+          <%= link_to favorite.post_music.title, post_music_path(favorite.post_music) %>
+        <% end %>
+      </div>
+    </div>
+    <% if @user_found == current_user %>
+      <%= link_to(new_post_music_path, class: "text-dark") do %>
+        <span>Upload a track<i class="fa-solid fa-file-arrow-up"></i></span>
+      <% end %> 
+    <% end %>
+    <div>
+      <div>
+        <h5>My Tracks</h5>
+        <% @post_musics.each do |post_music| %>
+          <%= link_to user_path(post_music.user_id) do %>
+            <%= post_music.user.name %>
+          <% end %>
+          <%= link_to post_music_path(post_music.user_id) do %>
+            <%= post_music.title %>
+          <% end %>
+          <%= post_music.body %>
+          <audio src= "<%= "#{post_music.file}" %>" controls="">
+            <a src="<%= "#{post_music.file}" %>">ダウンロード</a>
+          </audio>
+          <p><%= link_to "#{post_music.post_comments.count} comments", post_music_path(post_music.id) %></p>
+        <% end %>
+      </div>
+    </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
