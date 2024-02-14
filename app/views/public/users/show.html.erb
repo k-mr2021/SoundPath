@@ -1,66 +1,129 @@
 <div class="container">
-  <div class="card-body">
-    <div class="row justify-content-center">
-      <div class="col-xl-auto col-lg-auto col-sm-auto col-auto">
-        <%= image_tag @user_found.get_profile_image(100,100), class: "rounded-circle mt-2"; %>
+  <div class="card mt-4 shadow-lg">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-xl-auto col-lg-auto col-sm-auto col-auto">
+          <h5><b>My information</b></h5>
+        </div>
       </div>
-      <div class="col-lg-auto col-sm-auto col-auto">
-        <span><i class="fa-solid fa-circle-user"></i><%= @user_found.name %></span><br>
-        <%= @user_found.introduction %>
-        <% if @user_found == current_user %>
-          <%= link_to "編集" , edit_user_path(@user_found) %>
-        <% end %>
-        <% if current_user != @user_found %>
-          <% if current_user.following?(@user_found) %>
-            <%= link_to "Unfollow", user_relationships_path(@user_found.id), method: :delete %>
-          <% else %>
-            <%= link_to "Follow", user_relationships_path(@user_found.id), method: :post %>
+      <div class="row justify-content-center">
+        <div class="col-xl-auto col-lg-auto col-sm-auto col-auto">
+          <%= image_tag @user_found.get_profile_image(100,100), class: "rounded-circle mt-2"; %>
+        </div>
+        <div class="col-lg-auto col-sm-auto col-auto">
+          <span><i class="fa-solid fa-circle-user"></i><%= @user_found.name %></span><br>
+          <%= @user_found.introduction %><br>
+          <b>Followings</b>
+          <%= link_to @user_found.followings.count, user_followings_path(@user_found) %>
+          <b>Followers</b>
+          <%= link_to @user_found.followers.count, user_followers_path(@user_found) %><br>
+          <% if @user_found == current_user %>
+            <%= link_to(edit_user_path(@user_found), class: "text-dark") do %>
+              <span>Edit <i class="fa-solid fa-pen-to-square"></i></span>
+            <% end %>
           <% end %>
-        <% end %>
-      </div>
-    </div>  
-    </div>
-    <div>
-      <div>
-        <b>Followings</b>
-        <%= link_to @user_found.followings.count, user_followings_path(@user_found) %>
-        <b>Followers</b>
-        <%= link_to @user_found.followers.count, user_followers_path(@user_found) %>
-      </div>
-    </div>
-    <div>
-      <div>
-        <h5>お気に入り</h5>
-        <% @favorites.each do |favorite| %>
-          <%= link_to favorite.post_music.user.name, user_path(favorite.post_music.user) %>
-          <%= link_to favorite.post_music.title, post_music_path(favorite.post_music) %>
-        <% end %>
-      </div>
-    </div>
-    <% if @user_found == current_user %>
-      <%= link_to(new_post_music_path, class: "text-dark") do %>
-        <span>Upload a track<i class="fa-solid fa-file-arrow-up"></i></span>
-      <% end %> 
-    <% end %>
-    <div>
-      <div>
-        <h5>My Tracks</h5>
-        <% @post_musics.each do |post_music| %>
-          <%= link_to user_path(post_music.user_id) do %>
-            <%= post_music.user.name %>
+          <% if current_user != @user_found %>
+            <% if current_user.following?(@user_found) %>
+              <%= link_to(user_relationships_path(@user_found.id),method: :delete, class: "text-dark") do %>
+                <span>Unfollow <i class="fa-solid fa-user-minus"></i></span>
+              <% end %>
+            <% else %>
+              <%= link_to(user_relationships_path(@user_found.id),method: :post, class: "text-dark") do %>
+                <span>Follow <i class="fa-solid fa-user-plus"></i></span>
+              <% end %>
+            <% end %>
           <% end %>
-          <%= link_to post_music_path(post_music.user_id) do %>
-            <%= post_music.title %>
+        </div>
+      </div>  
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-xl-auto col-lg-auto col-sm-auto col-auto mt-5">
+      <% if @user_found == current_user %>
+        <%= link_to(new_post_music_path, class: "text-dark") do %>
+          <span><h3>Upload a track <i class="fa-solid fa-file-arrow-up"></i></h3></span>
+        <% end %> 
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xl-auto col-lg-auto col-sm-auto col-auto mt-3 mb-5">
+      <h5>My fovorites</h5>
+      <% @favorites.each do |favorite| %>
+        <span class="border border-2">
+          <%= link_to(user_path(favorite.post_music.user), class: "text-dark") do %>
+             <strong><span><i class="fa-solid fa-circle-user"></i><%= favorite.post_music.user.name %></span></strong> |
           <% end %>
+          <%= link_to(post_music_path(favorite.post_music), class: "text-dark") do %>
+            <strong><i class="fa-regular fa-file-audio"></i><span><%= favorite.post_music.title %></span></strong>
+          <% end %>
+        </span>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xl-auto col-lg-auto col-sm-auto col-auto">
+      <h5>My Tracks</h5>
+    </div>
+    <% @post_musics.each do |post_music| %>
+      <div class="card mt-4 mx-auto shadow-lg">
+        <div class="col-xl-auto col-lg-auto col-sm-auto col-auto">
           <%= post_music.body %>
-          <audio src= "<%= "#{post_music.file}" %>" controls="">
+          <audio src= "<%= "#{post_music.file}" %>" controls="" class="custom-audio-player mt-2">
             <a src="<%= "#{post_music.file}" %>">ダウンロード</a>
           </audio>
-          <p><%= link_to "#{post_music.post_comments.count} comments", post_music_path(post_music.id) %></p>
-        <% end %>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-xl-auto col-lg-auto col-sm-auto col-auto">
+              <p class="card-title">
+                <%= link_to(post_music_path(post_music.user_id), class: "text-dark") do %>
+                  <strong><i class="fa-regular fa-file-audio"></i><span><%= post_music.title %></span></strong>
+                <% end %>
+              </p>
+              <span><i class="fa-solid fa-circle-user"></i><%= post_music.user.name %></span><br>
+              <span><i class="fa-solid fa-message"></i>：<%= post_music.post_comments.count %></span> |
+              <span><i class="fa-solid fa-heart"></i> : <%= post_music.favorites.count %></span><br>
+              <span><b>Release : <%= post_music.created_at.strftime('%Y/%m/%d') %></b></span>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    <% end %>
+  </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
