@@ -1,22 +1,22 @@
-<div class= "container">
-  <div class= "row">
+<div class="container">
+  <div class="row">
     <h3 class="text-center col mt-4 mb-2 ">Upload a track</h3>
   </div> 
   <%= form_with model: Post_music.new do |f| %>
-    <div class= "row justify-content-center">
-      <div class= "col-lg-auto col-sm-auto col-auto mb-5 mt-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-auto col-sm-auto col-auto mb-5 mt-5">
         <%= f.label :title %>
         <%= f.text_field :title, size: "40x5" %>
       </div>
     </div>
-    <div class= "row justify-content-center">
+    <div class="row justify-content-center">
       <div class= "col-lg-auto col-sm-auto col-auto mb-5" >
         <%= f.label :file %>
         <%= f.file_field :file %>
       </div>
     </div>
-    <div class= "row justify-content-center">
-      <div class= "col-lg-auto col-sm-auto col-auto mb-5" >
+    <div class="row justify-content-center">
+      <div class="col-lg-auto col-sm-auto col-auto mb-5" >
         <%= f.submit "送信" %>
       </div>
     </div>
@@ -32,6 +32,7 @@
     <% end %>
   <% end %>
 </div> 
+
 
 
 

@@ -21,13 +21,15 @@
     <div class= "d-flex align-items-center justify-content-center" style="height:100px;">
       <div class= "row">
         <div class= "col">
-          <%= link_to "退会しない", user_path(current_user) %>
-          <%= link_to "退会する", withdrawal_path, method: :patch, data: {confirm: "本当に退会しますか？"} %>
+          <%= link_to "退会しない", user_path(current_user), class: "btn btn-secondary mr-3" %>
+          <%= link_to "退会する", withdrawal_path, class: "btn btn-danger", method: :patch, data: {confirm: "本当に退会しますか？"} %>
          </div>
       </div>
     </div>
   </div>
 </div>
+
+
 
 
 

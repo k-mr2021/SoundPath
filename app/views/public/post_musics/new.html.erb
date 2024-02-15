@@ -5,19 +5,19 @@
   <%= form_with model: @post_music do |f| %>
     <div class= "row justify-content-center">
       <div class= " col-lg-auto col-sm-auto col-auto mb-5 mt-5">
-        <%= f.label :title %>
+        <%= f.label :title %><br>
         <%= f.text_field :title, size: "40x5" %>
       </div>
     </div>
     <div class= "row justify-content-center">
       <div class= "col-lg-auto col-sm-auto col-auto mb-5" >
-        <%= f.label :file %>
+        <%= f.label :file %><br>
         <%= f.file_field :file %>
       </div>
     </div>
     <div class= "row justify-content-center">
       <div class= "col-lg-auto col-sm-auto col-auto mb-5" >
-        <%= f.submit "送信" %>
+        <%= f.submit "送信", class: "btn btn-lg btn-block btn-info mt-4" %>
       </div>
     </div>
     <% if @post_music.errors.any? %>
@@ -34,6 +34,7 @@
     <% end %>
   <% end %>
 </div> 
+
 
 
 

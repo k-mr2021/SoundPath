@@ -1,29 +1,52 @@
-<div>
-  <div>
-    <div>
-      <h1>User情報編集</h1>
-    </div>
+<div class="container">
+  <div class="row">
+    <h3 class="text-center col mt-4 mb-2 ">Edit information</h3>
   </div>
   <%= form_with model: @user_found do |f| %>
-    <div>
-      <div>
-        <p>Image</p>
+    <div class="row justify-content-center">
+      <div class="col-lg-auto col-sm-auto col-auto mb-5 mt-5">
+        <%= f.label :profile_image %><br>
         <%= f.file_field :profile_image, accept: "image/*" %>
-        <p>Name</p>
-        <%= f.text_field :name, autofocus: true, id:"inputName" %>
-        <p>Intoroduction</p>
-        <%= f.text_area :introduction, autofocus: true, id:"inputIntroduction" %>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class= "col-lg-auto col-sm-auto col-auto mb-5" >
+        <%= f.label :name %><br>
+        <%= f.text_field :name, size: "40x5", autofocus: true, id:"inputName" %>
       </div>
-      <div>
-        <%= f.submit "編集" %>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-auto col-sm-auto col-auto mb-5" >
+        <%= f.label :introduction %><br>
+        <%= f.text_area :introduction, size: "40x5", autofocus: true, id:"inputIntroduction" %>
       </div>
-      <div>
-        <%= link_to "退会", check_path %>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-auto col-sm-auto col-auto mb-5" >
+        <%= f.submit "編集", class: "btn btn-lg btn-block btn-info mt-4" %>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-auto col-sm-auto col-auto" >
+        <%= link_to "退会", check_path,class: "btn btn-lg btn-block btn-warning" %>
       </div>
     </div>
   <% end %>
 </div>
     
+    
+    
+    
+    
+
+
+
+
+
+
+
+
+
 
 
 
