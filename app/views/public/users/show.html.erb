@@ -6,6 +6,7 @@
           <h5><b>My information</b></h5>
         </div>
       </div>
+      <!--プロフィール-->
       <div class="row justify-content-center">
         <div class="col-xl-auto col-lg-auto col-sm-auto col-auto">
           <%= image_tag @user_found.get_profile_image(100,100), class: "rounded-circle mt-2"; %>
@@ -37,6 +38,7 @@
       </div>  
     </div>
   </div>
+  <!--新規投稿のリンク-->
   <div class="row justify-content-center">
     <div class="col-xl-auto col-lg-auto col-sm-auto col-auto mt-5">
       <% if @user_found == current_user %>
@@ -46,6 +48,7 @@
       <% end %>
     </div>
   </div>
+  <!--お気に入り一覧-->
   <div class="row">
     <div class="col-xl-auto col-lg-auto col-sm-auto col-auto mt-3 mb-5">
       <h5>My fovorites</h5>
@@ -61,10 +64,9 @@
       <% end %>
     </div>
   </div>
+　<!--自分の投稿-->
   <div class="row">
-    <div class="col-xl-auto col-lg-auto col-sm-auto col-auto">
-      <h5>My Tracks</h5>
-    </div>
+    <h5>My Tracks</h5>
     <% @post_musics.each do |post_music| %>
       <div class="card mt-4 mx-auto shadow-lg">
         <div class="col-xl-auto col-lg-auto col-sm-auto col-auto">
@@ -74,24 +76,31 @@
           </audio>
         </div>
         <div class="card-body">
-          <div class="row">
-            <div class="col-xl-auto col-lg-auto col-sm-auto col-auto">
-              <p class="card-title">
-                <%= link_to(post_music_path(post_music.user_id), class: "text-dark") do %>
-                  <strong><i class="fa-regular fa-file-audio"></i><span><%= post_music.title %></span></strong>
-                <% end %>
-              </p>
-              <span><i class="fa-solid fa-circle-user"></i><%= post_music.user.name %></span><br>
-              <span><i class="fa-solid fa-message"></i>：<%= post_music.post_comments.count %></span> |
-              <span><i class="fa-solid fa-heart"></i> : <%= post_music.favorites.count %></span><br>
-              <span><b>Release : <%= post_music.created_at.strftime('%Y/%m/%d') %></b></span>
-            </div>
+          <div class="col-xl-auto col-lg-auto col-sm-auto col-auto">
+            <p class="card-title">
+              <%= link_to(post_music_path(post_music.user_id), class: "text-dark") do %>
+                <strong><i class="fa-regular fa-file-audio"></i><span><%= post_music.title %></span></strong>
+              <% end %>
+            </p>
+            <span><i class="fa-solid fa-message"></i>：<%= post_music.post_comments.count %></span> |
+            <span><i class="fa-solid fa-heart"></i> : <%= post_music.favorites.count %></span><br>
+            <span><b>Release : <%= post_music.created_at.strftime('%Y/%m/%d') %></b></span>
           </div>
         </div>
       </div>
     <% end %>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
 
 
 

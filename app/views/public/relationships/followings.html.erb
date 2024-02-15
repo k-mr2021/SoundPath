@@ -1,27 +1,57 @@
-<h2>Follows</h2>
-  <table class='table'>
-    <tbody>
-      <% @users.each do |user| %>
-        <tr>
-          <td>
-            <%= link_to user_path(user) do %>
-              <%= image_tag user.get_profile_image(50,50), class: "rounded-circle"; %>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-xl-10 col-lg-10 col-sm-10 col-10 mt-4">
+      <h5>Followings</h5>
+      <table class='table'>
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Followings</th>
+            <th>Followers</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @users.empty? %>
+            <tr>
+              <td colspan="4"><b>ユーザーがいません</b></td>
+            </tr>
+          <% else %>
+            <% @users.each do |user| %>
+              <tr>
+                <td>
+                  <%= link_to user_path(user) do %>
+                    <%= image_tag user.get_profile_image(50,50), class: "rounded-circle"; %>
+                  <% end %>
+                </td>
+                <td><%= user.name %></td>
+                <td>
+                  <%= link_to user_followings_path(user) do %>
+                    <%= user.followings.count %>
+                  <% end %>
+                </td>
+                <td>  
+                  <%= link_to user_followers_path(user) do %>
+                    <%= user.followers.count %>
+                  <% end %>
+                </td>
+              </tr>
             <% end %>
-          </td>
-          <td><%= user.name %></td>
-          <td>
-            <%= link_to user_followings_path(user) do %>
-              <b>Following<%= user.followings.count %></b>
-            <% end %>
-          </td>
-          <td>  
-            <%= link_to user_followers_path(user) do %>
-              <b>Followers<%= user.followers.count %></b>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table> 
+          <% end %>
+        </tbody>
+      </table> 
+    </div>
+  </div>
+</div>
+
+
+
+  
+  
+  
+  
+  
+  
+  
   
   
