@@ -22,7 +22,11 @@ class PostMusic < ApplicationRecord
   
   # いいね
   def favorited_by?(user)
-    favorites.exists?(user_id: user.id)
+    if user.nil?
+      false
+    else
+      favorites.exists?(user_id: user.id)
+    end
   end
   
   #いいねの通知
@@ -79,6 +83,7 @@ class PostMusic < ApplicationRecord
   
   
 end
+
 
 
 

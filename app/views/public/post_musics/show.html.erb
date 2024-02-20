@@ -18,7 +18,7 @@
             <strong><i class="fa-regular fa-file-audio"></i><span><%= @post_music.title %></span></strong>
           </p>
           <%= link_to(user_path(@post_music.user_id), class: "text-dark") do %>
-            <span><i class="fa-solid fa-circle-user"></i><%= @post_music.user.name %></span><br>
+            <span><i class="fa-solid fa-circle-user"></i><b><%= @post_music.user.name %></b></span><br>
           <% end %>
           <span><i class="fa-solid fa-message"></i>：<%= @post_music.post_comments.count %></span> |
           <% if @post_music.favorited_by?(current_user) %>
@@ -30,7 +30,7 @@
               <span><i class="fa-solid fa-heart"></i> : <%= @post_music.favorites.count %></span><br>
             <% end %>
           <% end %>
-          <span><b>Release : <%= @post_music.created_at.strftime('%Y/%m/%d') %></b></span>
+          <span>Release : <%= @post_music.created_at.strftime('%Y/%m/%d') %></span>
         </div>
       </div>
     </div>
@@ -39,7 +39,9 @@
     <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12">
       <%= form_with model: [@post_music, @post_comment] do |f| %>
         <div style="display: flex; align-items: center;">
-          <%= image_tag current_user.get_profile_image(60,60), class: "rounded-circle"; %>
+          <% if current_user %>
+            <%= image_tag current_user.get_profile_image(60,60), class: "rounded-circle"; %>
+          <% end %>
           <%= f.text_area :comment, class: "form-control", style: "width:100%", rows: "1", placeholder: "Write a comment" %>
           <%= button_tag type: "submit", class: "btn btn-secondary" do %>
             <i class="fa-regular fa-paper-plane"></i>
@@ -74,6 +76,8 @@
     </div>
   <% end %>
 </div>
+
+
 
 
 

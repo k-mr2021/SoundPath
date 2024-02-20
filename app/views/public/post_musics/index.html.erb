@@ -4,7 +4,7 @@
       <div class="card mt-4 mx-auto shadow-lg">
         <div class="col-xl-auto col-lg-auto col-sm-auto col-auto mr-5">
           <%= post_music.body %>
-        　<audio src= "<%= "#{post_music.file}" %>" controls=""  class="custom-audio-player ml-5" >
+        　<audio src= "<%= "#{post_music.file}" %>" controls="" class="custom-audio-player ml-5" >
             <a src="<%= "#{post_music.file}" %>">ダウンロード</a>
           </audio>
         </div>
@@ -20,11 +20,11 @@
                 <% end %>
               </p>
               <%= link_to(user_path(post_music.user.id), class: "text-dark") do %>
-                <span><i class="fa-solid fa-circle-user"></i><%= post_music.user.name %></span><br>
+                <strong><i class="fa-solid fa-circle-user"></i><span><%= post_music.user.name %></span></strong><br>
               <% end %>
               <span><i class="fa-solid fa-message"></i>：<%= post_music.post_comments.count %></span> |
               <span><i class="fa-solid fa-heart"></i> : <%= post_music.favorites.count %></span><br>
-              <span><b>Release : <%= post_music.created_at.strftime('%Y/%m/%d') %></b></span>
+              <span>Release : <%= post_music.created_at.strftime('%Y/%m/%d') %></span>
             </div>
           </div>
         </div>
@@ -32,6 +32,8 @@
     <% end %>
   </div>
 </div>
+
+
 
 
 

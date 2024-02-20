@@ -1,38 +1,104 @@
-<div>
-  <div>
-    <div>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-xl-auto col-lg-auto col-sm-auto col-auto mt-5">
       <% if @keyword.present? %>
-        <h3><%= "#{@keyword}の検索結果" %></h3
+        <h5><%= "#{@keyword}の検索結果" %></h5>
       <% end %>
     </div>
   </div>
-  <% if @users == [] %>
-    <h5><span>Artists</span>なし</h5>
-  <% end %>
-  <div>
+  <div class="row justify-content-start">
+    <div class="col-xl-auto col-lg-auto col-sm-auto col-auto mt-5">
+      <b>Artists</b>
+      <% if @users == [] %>
+        <h5 class="mt-3"><span>Artists</span>の検索結果なし</h5>
+      <% end %>
+    </div>
+  </div>
+  <div class="row justify-content-start">
     <% @users.each do |user| %>
-      <div>
-        <b>Artists</b><br>
-        <%= user.name %>
+      <div class="card mt-4 shadow-lg">
+        <div class="card-body">
+          <div class="col-xl-auto col-lg-auto col-sm-auto col-auto">
+            <%= image_tag user.get_profile_image(100,100), class: "rounded-circle mt-2 mb-2"; %>
+          </div>
+          <div class="col-xl-auto col-lg-auto col-sm-auto col-auto">
+            <%= link_to(user_path(user.id), class: "text-dark") do %>
+              <strong><i class="fa-solid fa-circle-user"></i><%= user.name %></strong><br>
+            <% end %>
+            <strong><%= user.introduction %>
+          </div>
+        </div>
       </div>
     <% end %>
   </div>
-  <% if @post_musics == [] %>
-    <h5><span>Tracks</span>なし</h5>
-  <% end %>
-  <div>
+  <span class="border-bottom"></span>
+  <div class="row justify-content-start">
+    <div class="col-xl-auto col-lg-auto col-sm-auto col-auto mt-5">
+      <b>Tracks</b>
+      <% if @post_musics == [] %>
+        <h5 class="mt-3"><span>Tracks</span>の検索結果なし</h5>
+      <% end %>
+    </div>
+  </div>
+  <div class="row justify-content-start">
     <% @post_musics.each do |post_music| %>
-      <div>
-        <b>Tracks</b><br>
-        <%= post_music.title %>
-        <%= post_music.body %>
-  　　　　<audio src= "<%= "#{post_music.file}" %>" controls="">
-           <a src="<%= "#{post_music.file}" %>">ダウンロード</a>
-         </audio>
+      <div class="card mt-4 shadow-lg">
+        <div class="card-body">
+          <div class="col-xl-auto col-lg-auto col-sm-auto col-auto">
+            <%= post_music.body %>
+            <audio src= "<%= "#{post_music.file}" %>" controls="" class="custom-audio-player ml-auto mt-2">
+               <a src="<%= "#{post_music.file}" %>">ダウンロード</a>
+            </audio>
+          </div>
+          <div class="col-xl-auto col-lg-auto col-sm-auto col-auto mt-3">
+            <%= link_to(post_music_path(post_music.id), class: "text-dark") do %>
+              <strong><i class="fa-regular fa-file-audio"></i><%= post_music.title %></strong><br>
+            <% end %>
+            <%= link_to(user_path(post_music.user.id), class: "text-dark") do %>
+              <strong><i class="fa-solid fa-circle-user"></i><%= post_music.user.name %></strong><br>
+            <% end %>
+            <span>Release : <%= post_music.created_at.strftime('%Y/%m/%d') %></span>
+          </div>
+        </div>
       </div>
     <% end %>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

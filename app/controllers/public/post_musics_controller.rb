@@ -1,4 +1,5 @@
 class Public::PostMusicsController < ApplicationController
+  before_action :authenticate_user!
   
   def new
     @post_music = PostMusic.new
@@ -21,10 +22,6 @@ class Public::PostMusicsController < ApplicationController
   def show
     @post_music= PostMusic.find(params[:id])
     @post_comment = PostComment.new
-  end
-  
-  def edit
-    @post_music = PostMusic.find(params[:id])
   end
   
   def update
@@ -53,6 +50,7 @@ def search_params
 end
   
 end
+
 
 
 

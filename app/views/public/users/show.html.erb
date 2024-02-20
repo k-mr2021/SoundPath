@@ -11,7 +11,7 @@
         <div class="col-xl-auto col-lg-auto col-sm-auto col-auto">
           <%= image_tag @user_found.get_profile_image(100,100), class: "rounded-circle mt-2"; %>
         </div>
-        <div class="col-lg-auto col-sm-auto col-auto">
+        <div class="col-xl-auto col-lg-auto col-sm-auto col-auto">
           <span><i class="fa-solid fa-circle-user"></i><%= @user_found.name %></span><br>
           <%= @user_found.introduction %><br>
           <b>Followings</b>
@@ -20,7 +20,7 @@
           <%= link_to @user_found.followers.count, user_followers_path(@user_found) %><br>
           <% if @user_found == current_user %>
             <%= link_to(edit_user_path(@user_found), class: "text-dark") do %>
-              <span>Edit <i class="fa-solid fa-pen-to-square"></i></span>
+              <span><b>Edit</b> <i class="fa-solid fa-pen-to-square"></i></span>
             <% end %>
           <% end %>
           <% if current_user != @user_found %>
@@ -52,45 +52,92 @@
   <div class="row">
     <div class="col-xl-auto col-lg-auto col-sm-auto col-auto mt-3 mb-5">
       <h5>My fovorites</h5>
-      <% @favorites.each do |favorite| %>
-        <span class="border border-2">
-          <%= link_to(user_path(favorite.post_music.user), class: "text-dark") do %>
-             <strong><span><i class="fa-solid fa-circle-user"></i><%= favorite.post_music.user.name %></span></strong> |
-          <% end %>
-          <%= link_to(post_music_path(favorite.post_music), class: "text-dark") do %>
-            <strong><i class="fa-regular fa-file-audio"></i><span><%= favorite.post_music.title %></span></strong>
-          <% end %>
-        </span>
+      <% if @favorites.present? %>
+        <% @favorites.each do |favorite| %>
+          <span class="border border-2">
+            <%= link_to(user_path(favorite.post_music.user), class: "text-dark") do %>
+               <strong><span><i class="fa-solid fa-circle-user"></i><%= favorite.post_music.user.name %></span></strong> |
+            <% end %>
+            <%= link_to(post_music_path(favorite.post_music), class: "text-dark") do %>
+              <strong><i class="fa-regular fa-file-audio"></i><span><%= favorite.post_music.title %></span></strong>
+            <% end %>
+          </span>
+        <% end %>
+      <% else %>
+        <div>
+          <p>お気に入りはありません</p>
+        </div>
       <% end %>
     </div>
   </div>
 　<!--自分の投稿-->
   <div class="row">
-    <h5>My Tracks</h5>
-    <% @post_musics.each do |post_music| %>
-      <div class="card mt-4 mx-auto shadow-lg">
-        <div class="col-xl-auto col-lg-auto col-sm-auto col-auto">
-          <%= post_music.body %>
-          <audio src= "<%= "#{post_music.file}" %>" controls="" class="custom-audio-player mt-2">
-            <a src="<%= "#{post_music.file}" %>">ダウンロード</a>
-          </audio>
-        </div>
-        <div class="card-body">
-          <div class="col-xl-auto col-lg-auto col-sm-auto col-auto">
-            <p class="card-title">
-              <%= link_to(post_music_path(post_music.user_id), class: "text-dark") do %>
-                <strong><i class="fa-regular fa-file-audio"></i><span><%= post_music.title %></span></strong>
+    <div class="col-xl-auto col-lg-auto col-sm-auto col-auto mt-5">
+      <h5>My Tracks</h5>
+    </div>
+  </div>
+  <div class="row">
+    <% if @post_musics.present? %>
+      <% @post_musics.each do |post_music| %>
+        <div class="card mt-2 shadow-lg">
+          <div class="card-body">
+            <div class="col-xl-auto col-lg-auto col-sm-auto col-auto">
+              <%= post_music.body %>
+              <audio src= "<%= "#{post_music.file}" %>" controls="" class="custom-audio-player mb-2">
+                <a src="<%= "#{post_music.file}" %>">ダウンロード</a>
+              </audio>
+            </div>
+            <div class="col-xl-auto col-lg-auto col-sm-auto col-auto">
+              <p class="card-title">
+                <%= link_to(post_music_path(post_music.id), class: "text-dark") do %>
+                  <strong><i class="fa-regular fa-file-audio"></i><span><%= post_music.title %></span></strong><br>
+                <% end %>
+              </p>
+              <span><i class="fa-solid fa-message"></i>：<%= post_music.post_comments.count %></span> |
+              <span><i class="fa-solid fa-heart"></i> : <%= post_music.favorites.count %></span><br>
+              <span>Release : <%= post_music.created_at.strftime('%Y/%m/%d') %></b></span><br>
+              <% if @user_found == current_user %>
+                <%= link_to(post_music_path(post_music), class: "text-dark", method: :delete) do %>
+                  <span><b>Delete</b> <i class="fa-solid fa-trash"></i></span>
+                <% end %>
               <% end %>
-            </p>
-            <span><i class="fa-solid fa-message"></i>：<%= post_music.post_comments.count %></span> |
-            <span><i class="fa-solid fa-heart"></i> : <%= post_music.favorites.count %></span><br>
-            <span><b>Release : <%= post_music.created_at.strftime('%Y/%m/%d') %></b></span>
+            </div>
           </div>
         </div>
+      <% end %>
+    <% else %>
+      <div class="col-xl-auto col-lg-auto col-sm-auto col-auto mt-5 text-center">
+        <p>投稿はありません</p>
       </div>
     <% end %>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
