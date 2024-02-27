@@ -38,8 +38,9 @@
                   <li class= "nav-item">
                     <%= link_to "My Page", user_path(current_user), class: "btn btn-outline-secondary mx-1 my-1" %>
                   </li>
-                   <li class= "nav-item">
+                  <li class= "nav-item">
                     <%= link_to "All Tracks", post_musics_path, class: "btn btn-outline-secondary mx-1 my-1" %>
+                  </li>
                   <li>
                     <%= link_to  notifications_path, class: "btn btn-outline-secondary mx-1 my-1" do %>
                       <i class="fa-solid fa-bell"></i>
@@ -51,7 +52,6 @@
                 <!--User、Admin共通-->
                 <% else %>
                   <li>
-                    <!--通知一覧-->
                     <%= link_to "Sign up", new_user_registration_path, class: "btn btn-outline-secondary mx-1 my-1" %>
                   </li>
                   <li class= "nav-item">

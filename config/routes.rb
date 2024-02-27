@@ -31,7 +31,7 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     get '/about' => 'homes#about'
     get '/users/check' => 'users#check', as: 'check'
-    patch '/users/withdrawal' => 'userss#withdrawal', as: 'withdrawal'
+    patch '/users/withdrawal' => 'users#withdrawal', as: 'withdrawal'
     resources :users, only: [:show, :index, :edit, :update] do
       resource :relationships, only: [:create, :destroy]
       get "followings" => "relationships#followings", as: "followings"
@@ -40,7 +40,7 @@ Rails.application.routes.draw do
     resources :post_musics do
       resources :post_comments, only: [:create, :destroy]
       # indexを表示するため別途'get'で取得
-      resource :favorite, only: [:create, :destroy]
+      resource :favorite, only: [:index, :create, :destroy]
       get 'favorite', to: 'favorites#index', on: :member
     end
     resources :searches, only: :index, as: :search
@@ -48,6 +48,8 @@ Rails.application.routes.draw do
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
+
+
 
 
 

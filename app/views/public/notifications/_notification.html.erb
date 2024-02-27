@@ -1,53 +1,58 @@
-  <div>
-    <div>
-      <% visitor = notification.visitor %>
-      <% visited = notification.visited %>
-      
-      <div>
-        <div>
-          <div>
-            <%= link_to user_path(visitor) do %>
-              <b><%= visitor.name %></b>
-            <% end %>
-            <span>さんが</span>
-            <div class="text-muted small">
-              <%= notification.decorate.how_long_ago %>
-            </div>
-          </div>
-          <div>
-            <% case notification.action %>
-              <% when "follow" %>
-                あなたをフォローしました
-              <% when "favorite" %>
-                <%= link_to "あなたの楽曲", notification.post_music %>
-                にいいねしました
-              <% when "comment" %>
-              <% if notification.post_music.user_id == visited.id %>
-                <%= link_to "あなたの楽曲", notification.post_music %>
-              <% else %>
-                <%= link_to post_music_path(notification.post_music) do %>
-                  <strong><%= notification.post_music.user.name + "さんの楽曲" %></strong>
-                <% end %>
-              <% end %>
-              にコメントしました
-              <p>
-                <%= Comment.find_by(id: notification.post_comment_id)&.post_comment %>
-              </p>
-            <% end %>
-          </div>
-          <small>
-            <%= form_with url: notification_path(notification), method: :delete, local: false do |f| %>
-              <%= f.submit "削除" %>
-            <% end %>
-          </small>
-        </div>
-      </div>
+<div class="container">
+  <div class="row justify-content-center mt-3">
+    <% visitor = notification.visitor %>
+    <% visited = notification.visited %>
+    <div class="col-xl-auto col-lg-auto col-sm-auto col-auto mt-4">
+      <%= link_to user_path(visitor) do %>
+        <b><%= visitor.name %></b>
+      <% end %>
+      <span>さんが</span>
     </div>
   </div>
+  <div class="row justify-content-center">
+    <span class="border-bottom">
+      <div class="col-xl-auto col-lg-auto col-sm-auto col-auto">
+        <% case notification.action %>
+          <% when "follow" %>
+            あなたをフォローしました
+          <% when "favorite" %>
+            あなたの楽曲にいいねしました
+        <% end %>
+        <%= link_to(notification_path(notification), class: "text-dark ml-2", method: :delete) do %>
+          <i class="fa-solid fa-trash"></i>
+        <% end %>
+      </div>
+    </span>
+  </div>
+</div>
 
 
 
 
-  
-  
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

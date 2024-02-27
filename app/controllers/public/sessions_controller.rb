@@ -38,7 +38,7 @@ class Public::SessionsController < Devise::SessionsController
   def guest_sign_in
     user = User.guest
     sign_in user
-    redirect_to user_path(current_user), notice: 'ゲストユーザーとしてログインしました。'
+    redirect_to user_path(current_user)
   end
   
   # 退会機能
@@ -56,12 +56,14 @@ class Public::SessionsController < Devise::SessionsController
       if user.valid_password?(params[:user][:password]) && (user.is_active == true)
         
       else
-        flash[:alert] = "このアカウントは退会済みです。"
+        flash[:alert] = "This account has been deleted."
         redirect_to new_user_registration_path
       end
     end
   end
 end
+
+
 
 
 

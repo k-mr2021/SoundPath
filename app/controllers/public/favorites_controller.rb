@@ -3,8 +3,10 @@ class Public::FavoritesController < ApplicationController
   def create
     post_music = PostMusic.find(params[:post_music_id])
     favorite = current_user.favorites.new(post_music_id: post_music.id)
-    favorite.save
-    redirect_to post_music_path(post_music)  
+    if favorite.save
+      post_music.create_notification_favorite!(current_user)
+      redirect_to post_music_path(post_music)  
+    end
   end
   
   def destroy
@@ -19,6 +21,11 @@ class Public::FavoritesController < ApplicationController
   end
   
 end
+
+
+
+
+
 
 
 

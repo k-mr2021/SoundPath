@@ -1,9 +1,12 @@
 <div class="container">
+  <div class="text-center">
+    <b><%= flash[:notice] %></b>
+  </div>
   <div class="card mt-4 shadow-lg">
     <div class="card-body">
       <div class="row">
         <div class="col-xl-auto col-lg-auto col-sm-auto col-auto">
-          <h5><b>My information</b></h5>
+          <h5><b><%= @user_found.name %> Information</b></h5>
         </div>
       </div>
       <!--プロフィール-->
@@ -14,9 +17,9 @@
         <div class="col-xl-auto col-lg-auto col-sm-auto col-auto">
           <span><i class="fa-solid fa-circle-user"></i><%= @user_found.name %></span><br>
           <%= @user_found.introduction %><br>
-          <b>Followings</b>
+          Followings
           <%= link_to @user_found.followings.count, user_followings_path(@user_found) %>
-          <b>Followers</b>
+          Followers
           <%= link_to @user_found.followers.count, user_followers_path(@user_found) %><br>
           <% if @user_found == current_user %>
             <%= link_to(edit_user_path(@user_found), class: "text-dark") do %>
@@ -51,17 +54,12 @@
   <!--お気に入り一覧-->
   <div class="row">
     <div class="col-xl-auto col-lg-auto col-sm-auto col-auto mt-3 mb-5">
-      <h5>My fovorites</h5>
+      <h5>My fovorites tracks</h5>
       <% if @favorites.present? %>
         <% @favorites.each do |favorite| %>
-          <span class="border border-2">
-            <%= link_to(user_path(favorite.post_music.user), class: "text-dark") do %>
-               <strong><span><i class="fa-solid fa-circle-user"></i><%= favorite.post_music.user.name %></span></strong> |
-            <% end %>
-            <%= link_to(post_music_path(favorite.post_music), class: "text-dark") do %>
-              <strong><i class="fa-regular fa-file-audio"></i><span><%= favorite.post_music.title %></span></strong>
-            <% end %>
-          </span>
+          <%= link_to(post_music_path(favorite.post_music), class: "text-dark mr-4") do %>
+            <strong><i class="fa-regular fa-file-audio"></i><%= favorite.post_music.title %></strong>
+          <% end %>
         <% end %>
       <% else %>
         <div>
@@ -73,12 +71,12 @@
 　<!--自分の投稿-->
   <div class="row">
     <div class="col-xl-auto col-lg-auto col-sm-auto col-auto mt-5">
-      <h5>My Tracks</h5>
+      <h5>My tracks</h5>
     </div>
   </div>
   <div class="row">
     <% if @post_musics.present? %>
-      <% @post_musics.each do |post_music| %>
+        <% @post_musics.each do |post_music| %>
         <div class="card mt-2 shadow-lg">
           <div class="card-body">
             <div class="col-xl-auto col-lg-auto col-sm-auto col-auto">
@@ -106,12 +104,29 @@
         </div>
       <% end %>
     <% else %>
-      <div class="col-xl-auto col-lg-auto col-sm-auto col-auto mt-5 text-center">
+      <div class="col-xl-auto col-lg-auto col-sm-auto col-auto text-center">
         <p>投稿はありません</p>
       </div>
     <% end %>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

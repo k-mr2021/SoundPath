@@ -28,7 +28,7 @@ class Admin::SessionsController < Devise::SessionsController
   def guest_sign_in
     admin = Admin.guest
     sign_in admin
-    redirect_to admin_users_path, notice: 'ゲストユーザーとしてログインしました。'
+    redirect_to admin_users_path
   end
   
   def after_sign_in_path_for(resource)

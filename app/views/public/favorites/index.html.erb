@@ -1,5 +1,41 @@
-<h5>お気に入り一覧</h5>
-<% @favorites.each do |favorite| %>
-  <%= link_to favorite.post_music.title, post_music_path(favorite.post_music) %>
-<% end %>
-
+<div class="card-list-container py-5">
+  <div class="row">
+    <h5>My fovorites</h5>
+    <% if @favorites.present? %>
+      <% @favorites.each do |favorite| %>
+        <div class="card mt-4 mx-auto shadow-lg">
+          <div class="col-xl-auto col-lg-auto col-sm-auto col-auto mr-5">
+            <%= post_music.body %>
+            <audio src= "<%= "#{post_music.file}" %>" controls="" class="custom-audio-player mb-2">
+              <a src="<%= "#{post_music.file}" %>">ダウンロード</a>
+            </audio>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-xl-auto col-lg-auto col-sm-auto col-auto">
+                <%= image_tag post_music.user.get_profile_image(100,100), class: "rounded-circle"; %>
+              </div>
+              <div class="col-xl-auto col-lg-auto col-sm-auto col-auto">
+                <p class="card-title">
+                  <%= link_to(post_music_path(favorite.post_music), class: "text-dark") do %>
+                    <strong><i class="fa-regular fa-file-audio"></i><span><%= favorite.post_music.title %></span></strong><br>
+                  <% end %>
+                </p>
+              </div>
+              <%= link_to(user_path(favorite.post_music.user), class: "text-dark") do %>
+                <strong><i class="fa-solid fa-circle-user"></i><%= favorite.post_music.user.name %></strong><br>
+              <% end %>
+              <span><i class="fa-solid fa-message"></i>：<%= post_music.post_comments.count %></span> |
+              <span><i class="fa-solid fa-heart"></i> : <%= post_music.favorites.count %></span><br>
+              <span>Release : <%= post_music.created_at.strftime('%Y/%m/%d') %></span>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="col-xl-auto col-lg-auto col-sm-auto col-auto">
+        <p>お気に入りはありません</p>
+      </div>
+    <% end %>
+  </div>
+</div>

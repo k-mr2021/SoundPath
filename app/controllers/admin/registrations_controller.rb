@@ -63,11 +63,12 @@ class Admin::RegistrationsController < Devise::RegistrationsController
   
   def ensure_normal_admin
     if resource.email == 'guest.admin@example.com'
-      redirect_to admin_session_path, alert: 'ゲストユーザーは削除できません。'
+      redirect_to admin_session_path
     end
   end
 
   
 end
+
 
 

@@ -1,12 +1,14 @@
 class Public::PostCommentsController < ApplicationController
+  before_action :authenticate_user!
 
   def create
     post_music = PostMusic.find(params[:post_music_id])
     comment = PostComment.new(post_comment_params)
     comment.user_id = current_user.id
     comment.post_music_id = post_music.id
-    comment.save
-    redirect_to post_music_path(post_music)
+    if comment.save
+      redirect_to post_music_path(post_music)
+    end
   end
 
   def destroy
@@ -21,6 +23,13 @@ class Public::PostCommentsController < ApplicationController
   end
 
 end
+
+
+
+
+
+
+
 
 
 

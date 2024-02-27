@@ -25,13 +25,15 @@
             <%= link_to(user_path(user.id), class: "text-dark") do %>
               <strong><i class="fa-solid fa-circle-user"></i><%= user.name %></strong><br>
             <% end %>
-            <strong><%= user.introduction %>
+            Followings
+            <%= user.followings.count %><br>
+            Followers
+            <%= user.followers.count %>
           </div>
         </div>
       </div>
     <% end %>
   </div>
-  <span class="border-bottom"></span>
   <div class="row justify-content-start">
     <div class="col-xl-auto col-lg-auto col-sm-auto col-auto mt-5">
       <b>Tracks</b>
@@ -64,6 +66,11 @@
     <% end %>
   </div>
 </div>
+
+
+
+
+
 
 
 

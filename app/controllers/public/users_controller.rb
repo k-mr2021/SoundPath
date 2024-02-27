@@ -34,7 +34,7 @@ class Public::UsersController < ApplicationController
     @user.update(is_active: false)
     # ログアウトさせる
     reset_session
-    flash[:notice] = "退会が完了しました。"
+    flash[:notice] = "Withdrawal has been completed."
     redirect_to root_path
   end
   

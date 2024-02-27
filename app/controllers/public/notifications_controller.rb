@@ -2,10 +2,10 @@ class Public::NotificationsController < ApplicationController
   before_action :authenticate_user!
   
   def index
-    @notifications = current_user.passive_notifications.includes(:visitor, :post_comment, :post_music).page(params[:page]).per(10)
+    @notifications = current_user.passive_notifications.includes(:visitor, :post_music).page(params[:page]).per(10)
     @notification = Notification.find_by(id: params[:id])
     @notification = @notification.decorate if @notification.present?
-    @notifications.update_all(checked: true)
+    @notifications.update(checked: true)
   end
 
   def update
@@ -18,11 +18,12 @@ class Public::NotificationsController < ApplicationController
   def destroy
     @notification = Notification.find(params[:id])
     @notification.destroy
-    respond_to do |format|
-      format.js
-    end
+    redirect_to notifications_path
   end
 end
+
+
+
 
 
 

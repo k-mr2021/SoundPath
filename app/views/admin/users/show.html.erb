@@ -36,30 +36,47 @@
       </table>
     </div>
   </div>
-  <b>Tracks</b>
-  <!--投稿がない場合の分岐-->
-  <% if @post_music_exists %>
-    <div class= "row">
-      <div class= "col-lg-10 col-sm-6">
-        <%= @post_music.user.name %> - 
-        <%= @post_music.title %><br>
-        <%= @post_music.body %>
-        <audio src= "<%= "#{@post_music.file}" %>" controls="">
-          <a src="<%= "#{@post_music.file}" %>">ダウンロード</a>
-        </audio>
-      </div>
-    </div>
-  <% else %>
   <div class="row">
     <div class="col">
-      <b>投稿内容がありません</b>
+      <b><%= @user_found.name %>の投稿</b>
     </div>
   </div>
-<% end %>
+  <!--投稿がない場合の分岐-->
+  <div class="row">
+    <% if @post_musics.present? %>
+      <% @post_musics.each do |post_music| %>
+        <div class="card mt-2 shadow-lg">
+          <div class="card-body">
+            <div class="col-xl-auto col-lg-auto col-sm-auto col-auto">
+              <%= post_music.body %>
+              <audio src= "<%= "#{post_music.file}" %>" controls="" class="custom-audio-player mb-2">
+                <a src="<%= "#{post_music.file}" %>">ダウンロード</a>
+              </audio>
+            </div>
+            <div class="col-xl-auto col-lg-auto col-sm-auto col-auto">
+              <p class="card-title">
+                <strong><i class="fa-regular fa-file-audio"></i><span><%= post_music.title %></span></strong><br>
+              </p>
+              <strong><i class="fa-solid fa-circle-user"></i><span><%= post_music.user.name %></span></strong> 
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="col">
+        <b>投稿内容がありません</b>
+      </div>
+    <% end %>
+  </div>
   <div class ="row justify-content-center">
     <%= link_to "ステータス変更", edit_admin_user_path(@user_found), class:"btn btn-success my-1 mx-4 px-4" %>
   </div>
 </div>
+
+
+
+
+
 
 
 
